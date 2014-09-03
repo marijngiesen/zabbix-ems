@@ -49,4 +49,3 @@ class SocketCollector:
             self.command = command
 
         self.socket.send(self.command)
-
