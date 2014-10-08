@@ -92,6 +92,11 @@ class Check(object):
         for metric in sorted(self.metrics.keys()):
             print "  %s" % metric
 
+    def need_root(self):
+        if os.getuid() != 0:
+            self.logger.exception("Need root privileges to perform this check")
+            sys.exit(1)
+
     def _correct_type(self, type, value):
         if type == MetricType.String:
             return str(value).strip()

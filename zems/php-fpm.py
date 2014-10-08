@@ -76,7 +76,7 @@ class PhpFpm(Check):
         fpm_config_path = self.config.get("fpm_config_path", "/etc/php-fpm.d")
 
         self.fpm_config = ConfigParser()
-        self.fpm_config.read(utils.find_files(fpm_config_path, "conf"))
+        self.fpm_config.read(utils.find_files_by_extension(fpm_config_path, "conf"))
 
         if len(self.fpm_config.sections()) == 0:
             self.logger.error("Can't read from PHP-FPM config")

@@ -116,6 +116,7 @@ def haproxy(key=None, pxname=None, svname=None):
     test = HAProxy()
 
     if key is not None:
+        test.need_root()
         test.get(key, pxname=pxname, svname=svname)
     else:
         test.print_metrics()
