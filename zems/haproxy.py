@@ -3,13 +3,8 @@ from commandr import command
 from check import Check, CheckFail, MetricType, Metric
 
 
-@command("haproxy")
-def haproxy(key, pxname=None, svname=None):
-    test = HAProxy()
-    test.get(key, pxname=pxname, svname=svname)
-
-
 class HAProxy(Check):
+    name = "haproxy"
     pxname = None
     svname = None
 
@@ -115,3 +110,14 @@ class HAProxy(Check):
             values = line.split(separator)
             if self.pxname in values and self.svname in values:
                 self.test_data = values
+
+@command("haproxy")
+def haproxy(key=None, pxname=None, svname=None):
+    test = HAProxy()
+
+    if key is not None:
+        test.get(key, pxname=pxname, svname=svname)
+    else:
+        test.print_metrics()
+
+

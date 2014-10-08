@@ -25,19 +25,23 @@ class Check(object):
     config = None
     debug = False
     logger = None
-    confdir = "../config"
+    confdir = "config"
 
     metrics = None
     test_data = None
     test_data_filtered = None
 
-    def __init__(self):
+    def __init__(self, name=None):
+        if name is not None:
+            self.name = name
+        if self.name == 'zems':
+            raise NotImplementedError("Class %s must redefine its name" % (self.__class__.__name__, ))
+
         self.config = self._get_config()
 
         if self.config.get('debug', False):
             self.debug = True
 
-        # Do something with logger etc.
         self.logger = logging.getLogger(self.__class__.__name__)
         self._set_logger_options()
 
@@ -83,6 +87,11 @@ class Check(object):
             self.logger.exception('Check unexpected error, getting %s' % (metric, ))
             sys.exit(1)
 
+    def print_metrics(self):
+        print "Available metrics:"
+        for metric in sorted(self.metrics.keys()):
+            print "  %s" % metric
+
     def _correct_type(self, type, value):
         if type == MetricType.String:
             return str(value).strip()
@@ -98,7 +107,7 @@ class Check(object):
             raise CheckFail("Unknown return type")
 
     def _get_config(self):
-        config = MyConfigParser(self.name)
+        config = MyConfigParser()
         config.read(os.path.join(self.confdir, self.name + ".conf"))
         return config
 
@@ -106,7 +115,7 @@ class Check(object):
         formatter = logging.Formatter("[%(name)s] %(asctime)s - %(levelname)s: %(message)s")
 
         # setting file handler (max 10 files of 1MB)
-        h = logging.handlers.RotatingFileHandler(self.config.get("logfile", "zems.log"), "a", 1 * 1024 * 1024, 10)
+        h = logging.handlers.RotatingFileHandler(self.config.get("logfile", "/var/log/zems.log"), "a", 1 * 1024 * 1024, 10)
 
         if self.debug:
             # setting stream handler
@@ -137,13 +146,15 @@ class Metric(object):
     type = None
     separator = None
     filter_callback = None
+    kwargs = {}
 
-    def __init__(self, key, position, type, separator, filter_callback=None):
+    def __init__(self, key, position, type, separator, filter_callback=None, **kwargs):
         self.key = key
         self.position = position
         self.type = type
         self.separator = separator
         self.filter_callback = filter_callback
+        self.kwargs = kwargs
 
     def __repr__(self):
         return self.key
@@ -157,7 +168,7 @@ class MyConfigParser(ConfigParser.ConfigParser):
     def get(self, option, default):
         try:
             return ConfigParser.ConfigParser.get(self, self.sectname, option)
-        except:
+        except Exception, e:
             return default
 
 

@@ -3,13 +3,8 @@ from commandr import command
 from check import Check, CheckFail, MetricType, Metric
 
 
-@command("redis")
-def redis(key, db=None):
-    test = Redis()
-    test.get(key, db=db)
-
-
 class Redis(Check):
+    name = "redis"
     db = None
 
     def _init_metrics(self):
@@ -82,3 +77,13 @@ class Redis(Check):
 
             if self.db in values:
                 self.test_data = values[1].split(",")
+
+
+@command("redis")
+def redis(key=None, db=None):
+    test = Redis()
+
+    if key is not None:
+        test.get(key, db=db)
+    else:
+        test.print_metrics()

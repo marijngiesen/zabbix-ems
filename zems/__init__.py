@@ -1,1 +1,1 @@
-__all__ = ["haproxy", "mysql", "redis"]
+__all__ = ["haproxy", "mysql", "nginx", "php-fpm", "redis"]
