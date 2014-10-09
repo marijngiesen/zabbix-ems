@@ -1,6 +1,7 @@
 from lib.socketcollector import *
 from commandr import command
 from check import Check, CheckFail, MetricType, Metric
+from lib.cache import Cache
 
 
 class HAProxy(Check):
@@ -94,13 +95,17 @@ class HAProxy(Check):
         return self._correct_type(metric.type, value)
 
     def _load_data(self):
+        self.test_data = Cache.read(self.name)
         if self.test_data is not None:
             return self.test_data
 
         collector = SocketCollector(socket_file=self.config.get("socket", "/var/lib/haproxy/stats.sock"),
                                     command="show info\nshow stat\n")
 
-        return collector.get().split("\n")
+        data = collector.get()
+        Cache.write(self.name, data)
+
+        return data.split("\n")
 
     def _filter_data(self, separator):
         if self.pxname is None or self.svname is None:

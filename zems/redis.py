@@ -1,6 +1,7 @@
 from lib.socketcollector import *
 from commandr import command
 from check import Check, CheckFail, MetricType, Metric
+from zems.lib.cache import Cache
 
 
 class Redis(Check):
@@ -59,6 +60,7 @@ class Redis(Check):
         return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
 
     def _load_data(self):
+        self.test_data = Cache.read(self.name)
         if self.test_data is not None:
             return self.test_data
 
@@ -66,13 +68,16 @@ class Redis(Check):
                                     port=self.config.get("port", "6379"),
                                     command="info\r\nquit\r\n")
 
-        return collector.get().split("\r\n")
+        data = collector.get().strip("\r")
+        Cache.write(self.name, data)
+
+        return data.split("\n")
 
     def _filter_data(self, separator):
         if self.db is None:
             raise CheckFail("Required parameters not set (db)")
 
-        for id, line in enumerate(self.test_data):
+        for db_id, line in enumerate(self.test_data):
             values = line.split(separator)
 
             if self.db in values:

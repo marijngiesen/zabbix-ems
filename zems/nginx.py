@@ -1,6 +1,7 @@
 from commandr import command
 from check import Check, CheckFail, MetricType, Metric
 from lib.urlcollector import UrlCollector
+from lib.cache import Cache
 
 
 class Nginx(Check):
@@ -8,7 +9,7 @@ class Nginx(Check):
 
     def _init_metrics(self):
         self.metrics = {
-            "connections_active": Metric("active connections", 0, MetricType.String, ":"),
+            "connections_active": Metric("active connections", 0, MetricType.Integer, ":"),
             "connections_reading": Metric("reading", 1, MetricType.Integer, " ", self._filter_data, linenumber=3),
             "connections_writing": Metric("writing", 3, MetricType.Integer, " ", self._filter_data, linenumber=3),
             "connections_waiting": Metric("waiting", 5, MetricType.Integer, " ", self._filter_data, linenumber=3),
@@ -33,6 +34,7 @@ class Nginx(Check):
         return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
 
     def _load_data(self):
+        self.test_data = Cache.read(self.name)
         if self.test_data is not None:
             return self.test_data
 
@@ -46,7 +48,10 @@ class Nginx(Check):
         if data.status_code != 200:
             raise CheckFail("Unable to retrieve data (error code: %s)" % data.status_code)
 
-        return data.text.strip().split("\n")
+        data = data.text.strip()
+        Cache.write(self.name, data)
+
+        return data.split("\n")
 
     def _filter_data(self, linenumber, separator):
         self.test_data = self.test_data[linenumber].strip().split(separator)

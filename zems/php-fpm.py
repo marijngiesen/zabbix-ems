@@ -5,6 +5,7 @@ from commandr import command
 from check import Check, CheckFail, MetricType, Metric
 from lib.fcgicollector import FcgiCollector
 from lib import utils
+from zems.lib.cache import Cache
 
 
 class PhpFpm(Check):
@@ -45,6 +46,7 @@ class PhpFpm(Check):
         return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
 
     def _load_data(self):
+        self.test_data = Cache.read(self.name)
         if self.test_data is not None:
             return self.test_data
 
@@ -66,6 +68,8 @@ class PhpFpm(Check):
         if not code.startswith("200"):
             self.logger.error("status: got response, but not correct")
             return None
+
+        Cache.write(self.name, data)
 
         return data.split("\n")
 
