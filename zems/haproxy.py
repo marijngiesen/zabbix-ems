@@ -1,5 +1,4 @@
-from lib.socketcollector import *
-from commandr import command
+from lib.socketconnector import *
 from check import Check, CheckFail, MetricType, Metric
 from lib.cache import Cache
 
@@ -99,10 +98,10 @@ class HAProxy(Check):
         if self.test_data is not None:
             return self.test_data
 
-        collector = SocketCollector(socket_file=self.config.get("socket", "/var/lib/haproxy/stats.sock"),
+        connector = SocketConnector(socket_file=self.config.get("socket", "/var/lib/haproxy/stats.sock"),
                                     command="show info\nshow stat\n")
 
-        data = collector.get()
+        data = connector.get()
         Cache.write(self.name, data)
 
         return data.split("\n")
@@ -115,15 +114,4 @@ class HAProxy(Check):
             values = line.split(separator)
             if self.pxname in values and self.svname in values:
                 self.test_data = values
-
-@command("haproxy")
-def haproxy(key=None, pxname=None, svname=None):
-    test = HAProxy()
-
-    if key is not None:
-        test.need_root()
-        test.get(key, pxname=pxname, svname=svname)
-    else:
-        test.print_metrics()
-
 

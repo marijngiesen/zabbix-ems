@@ -1,7 +1,7 @@
 from socket import *
 
 
-class SocketCollector:
+class SocketConnector:
     family = None
     type = None
     socket_file = None

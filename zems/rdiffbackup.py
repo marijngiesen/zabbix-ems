@@ -1,8 +1,8 @@
 import os
-from commandr import command
 
 from check import Check, CheckFail, MetricType, Metric
 from lib import utils
+from lib.cache import Cache
 
 
 class RdiffBackup(Check):
@@ -10,6 +10,8 @@ class RdiffBackup(Check):
 
     def _init_metrics(self):
         self.metrics = {
+            "start_time": Metric("StartTime", 0, MetricType.Float, " "),
+            "end_time": Metric("EndTime", 1, MetricType.Float, " "),
             "elapsed_time": Metric("ElapsedTime", 2, MetricType.Float, " "),
             "source_files": Metric("SourceFiles", 3, MetricType.Integer, " "),
             "source_file_size": Metric("SourceFileSize", 4, MetricType.Integer, " "),
@@ -40,9 +42,14 @@ class RdiffBackup(Check):
         return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
 
     def _load_data(self):
-        if self.test_data is None:
-            with open(self._get_statistics_file(), "r") as f:
-                self.test_data = f.readlines()
+        self.test_data = Cache.read(self.name, 3000)
+        if self.test_data is not None:
+            return self.test_data
+
+        with open(self._get_statistics_file(), "r") as f:
+            self.test_data = f.readlines()
+
+        Cache.write(self.name, self.test_data)
 
         return self.test_data
 
@@ -53,12 +60,3 @@ class RdiffBackup(Check):
         return utils.determine_newest_file(files)
 
 
-@command("rdiff-backup")
-def rdiffbackup(key=None):
-    test = RdiffBackup()
-
-    if key is not None:
-        test.need_root()
-        test.get(key)
-    else:
-        test.print_metrics()

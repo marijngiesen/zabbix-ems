@@ -1,6 +1,5 @@
-from commandr import command
 from check import Check, CheckFail, MetricType, Metric
-from lib.urlcollector import UrlCollector
+from lib.urlconnector import UrlConnector
 from lib.cache import Cache
 
 
@@ -43,8 +42,8 @@ class Nginx(Check):
             self.config.get("resource", "/nginx-status")
         )
 
-        collector = UrlCollector(url)
-        data = collector.get()
+        connector = UrlConnector(url)
+        data = connector.get()
         if data.status_code != 200:
             raise CheckFail("Unable to retrieve data (error code: %s)" % data.status_code)
 
@@ -57,11 +56,3 @@ class Nginx(Check):
         self.test_data = self.test_data[linenumber].strip().split(separator)
 
 
-@command("nginx")
-def nginx(key=None):
-    test = Nginx()
-
-    if key is not None:
-        test.get(key)
-    else:
-        test.print_metrics()

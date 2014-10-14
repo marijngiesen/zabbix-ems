@@ -25,7 +25,7 @@ class Check(object):
     config = None
     debug = False
     logger = None
-    confdir = "config"
+    confdir = "/etc/zems/config"
 
     metrics = None
     test_data = None
@@ -98,11 +98,12 @@ class Check(object):
             sys.exit(1)
 
     def _correct_type(self, type, value):
+        value = str(value)
         if type == MetricType.String:
-            return str(value).strip()
+            return value.strip()
         elif type == MetricType.Float:
             if len(value) == 0:
-                return 0
+                return 0.0
             return float(value)
         elif type == MetricType.Integer:
             if len(value) == 0:
@@ -153,7 +154,7 @@ class Metric(object):
     filter_callback = None
     kwargs = {}
 
-    def __init__(self, key, position, type, separator, filter_callback=None, **kwargs):
+    def __init__(self, key, position, type, separator=None, filter_callback=None, **kwargs):
         self.key = key
         self.position = position
         self.type = type

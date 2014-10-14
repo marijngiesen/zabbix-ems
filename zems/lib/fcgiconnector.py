@@ -1,7 +1,7 @@
 import flup_fcgi_client as fcgi_client
 
 
-class FcgiCollector:
+class FcgiConnector:
     socket_file = None
     host = None
     port = None

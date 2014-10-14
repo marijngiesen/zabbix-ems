@@ -1,6 +1,5 @@
-from commandr import command
 from check import Check, CheckFail, MetricType, Metric
-from lib.urlcollector import UrlCollector
+from lib.urlconnector import UrlConnector
 from lib.cache import Cache
 
 
@@ -38,7 +37,7 @@ class Apache(Check):
         return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
 
     def _load_data(self):
-        self.test_data = Cache.read(self.name, 9999999)
+        self.test_data = Cache.read(self.name)
         if self.test_data is not None:
             return self.test_data
 
@@ -47,8 +46,8 @@ class Apache(Check):
             self.config.get("resource", "/server-status")
         )
 
-        collector = UrlCollector(url)
-        data = collector.get()
+        connector = UrlConnector(url)
+        data = connector.get()
         if data.status_code != 200:
             raise CheckFail("Unable to retrieve data (error code: %s)" % data.status_code)
 
@@ -60,13 +59,3 @@ class Apache(Check):
     def _filter_data(self, linenumber, separator, key):
         data = self.test_data[linenumber].split(separator)[1].count(key)
         self.test_data[linenumber] = str(key) + ":" + str(data)
-
-
-@command("apache")
-def apache(key=None):
-    test = Apache()
-
-    if key is not None:
-        test.get(key)
-    else:
-        test.print_metrics()

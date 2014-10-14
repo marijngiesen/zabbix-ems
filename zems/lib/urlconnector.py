@@ -1,7 +1,7 @@
 import requests
 
 
-class UrlCollector:
+class UrlConnector:
     url = None
 
     def __init__(self, url):

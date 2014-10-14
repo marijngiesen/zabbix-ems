@@ -1,9 +1,7 @@
 from ConfigParser import ConfigParser
 
-from commandr import command
-
 from check import Check, CheckFail, MetricType, Metric
-from lib.fcgicollector import FcgiCollector
+from lib.fcgiconnector import FcgiConnector
 from lib import utils
 from zems.lib.cache import Cache
 
@@ -55,15 +53,15 @@ class PhpFpm(Check):
         listen = self.fpm_config.get(self.pool, "listen")
         status_path = self.fpm_config.get(self.pool, "pm.status_path")
         if listen.startswith("/"):
-            collector = FcgiCollector(socket_file=listen, uri=status_path)
+            connector = FcgiConnector(socket_file=listen, uri=status_path)
         else:
             if ":" in listen:
                 host, port = listen.split(":")
-                collector = FcgiCollector(host=host, port=port, uri=status_path)
+                connector = FcgiConnector(host=host, port=port, uri=status_path)
             else:
-                collector = FcgiCollector(port=listen, host="127.0.0.1", uri=status_path)
+                connector = FcgiConnector(port=listen, host="127.0.0.1", uri=status_path)
 
-        code, headers, data, error = collector.get()
+        code, headers, data, error = connector.get()
 
         if not code.startswith("200"):
             self.logger.error("status: got response, but not correct")
@@ -90,13 +88,3 @@ class PhpFpm(Check):
 
         if not self.fpm_config.has_option(self.pool, "pm.status_path"):
             raise CheckFail("Status path is not configured for pool %s" % self.pool)
-
-
-@command("php-fpm")
-def phpfpm(key=None, pool=None):
-    test = PhpFpm()
-
-    if key is not None:
-        test.get(key, pool=pool)
-    else:
-        test.print_metrics()

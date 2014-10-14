@@ -1,5 +1,4 @@
-from lib.socketcollector import *
-from commandr import command
+from lib.socketconnector import *
 from check import Check, CheckFail, MetricType, Metric
 from zems.lib.cache import Cache
 
@@ -64,11 +63,11 @@ class Redis(Check):
         if self.test_data is not None:
             return self.test_data
 
-        collector = SocketCollector(host=self.config.get("host", "localhost"),
+        connector = SocketConnector(host=self.config.get("host", "localhost"),
                                     port=self.config.get("port", "6379"),
                                     command="info\r\nquit\r\n")
 
-        data = collector.get().strip("\r")
+        data = connector.get().strip("\r")
         Cache.write(self.name, data)
 
         return data.split("\n")
@@ -83,12 +82,3 @@ class Redis(Check):
             if self.db in values:
                 self.test_data = values[1].split(",")
 
-
-@command("redis")
-def redis(key=None, db=None):
-    test = Redis()
-
-    if key is not None:
-        test.get(key, db=db)
-    else:
-        test.print_metrics()
