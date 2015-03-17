@@ -57,18 +57,15 @@ class Check(object):
         raise NotImplementedError("Class %s must reimplement _get method"
                                   % (self.__class__.__name__, ))
 
-    def get_val(self, metric=None, *args, **kwargs):
-        ret = self._get(metric, *args, **kwargs)
-        if type(ret) == float:
-            # prevent from printing in exp form
-            ret = ("%.6f" % ret).rstrip('0').rstrip('.')
-        return ret
-
     def get(self, metric=None, *args, **kwargs):
         self.logger.debug("executed get metric '%s', args '%s', kwargs '%s'" %
                           (str(metric), str(args), str(kwargs)))
         try:
-            print self.get_val(metric, *args, **kwargs)
+            metric = metric.lower()
+            if metric not in self.metrics:
+                raise CheckFail("Requested unknown metric: %s" % metric)
+
+            print self._get(metric, *args, **kwargs)
         except CheckFail, e:
             self.logger.exception('Check fail, getting %s' % (metric, ))
             if self.debug:

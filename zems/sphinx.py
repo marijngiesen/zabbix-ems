@@ -1,4 +1,4 @@
-from check import Check, CheckFail, MetricType, Metric
+from check import Check, MetricType, Metric
 from lib.mysqlconnector import MySQLConnector
 from lib.cache import Cache
 
@@ -41,12 +41,8 @@ class Sphinx(Check):
         }
 
     def _get(self, metric=None, *args, **kwargs):
-        metric = metric.lower()
-        if metric in self.metrics:
-            self.test_data = self._load_data()
-            return self._get_value(self.metrics[metric])
-
-        raise CheckFail("Requested not allowed metric")
+        self.test_data = self._load_data()
+        return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
         if self.test_data[metric.key] == "OFF" and not metric.type == MetricType.String:
@@ -57,16 +53,19 @@ class Sphinx(Check):
     def _load_data(self):
         self.test_data = Cache.read(self.name)
         if self.test_data is not None:
-            return self.test_data
+            return self._format_data(self.test_data)
 
         connector = MySQLConnector(host=self.config.get("host", "127.0.0.1"), port=self.config.get("port", 9306))
         data = connector.get("SHOW STATUS")
+        Cache.write(self.name, data)
 
+        return self._format_data(data)
+
+    def _format_data(self, data):
         tmp = {}
         for value in data:
             tmp[value["Counter"]] = value["Value"]
 
-        # Cache.write(self.name, data)
         return tmp
 
     def _filter_data(self, linenumber, separator, key):

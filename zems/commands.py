@@ -43,8 +43,8 @@ def redis(metric=None, db=None):
     run_test(Redis(), metric, db=db)
 
 
-@command("redis")
-def sphinx(metric=None, db=None):
+@command("sphinx")
+def sphinx(metric=None):
     from zems.sphinx import Sphinx
 
     run_test(Sphinx(), metric)

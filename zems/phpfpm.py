@@ -33,12 +33,8 @@ class PhpFpm(Check):
         if self.pool is None:
             raise CheckFail("Required parameters not set (pool)")
 
-        metric = metric.lower()
-        if metric in self.metrics:
-            self.test_data = self._load_data()
-            return self._get_value(self.metrics[metric])
-
-        raise CheckFail("Requested not allowed metric")
+        self.test_data = self._load_data()
+        return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
         return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])

@@ -18,12 +18,8 @@ class Nginx(Check):
         }
 
     def _get(self, metric=None, *args, **kwargs):
-        metric = metric.lower()
-        if metric in self.metrics:
-            self.test_data = self._load_data()
-            return self._get_value(self.metrics[metric])
-
-        raise CheckFail("Requested not allowed metric")
+        self.test_data = self._load_data()
+        return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
         if metric.filter_callback is not None:
