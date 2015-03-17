@@ -13,19 +13,19 @@ class PhpFpm(Check):
 
     def _init_metrics(self):
         self.metrics = {
-            "pool": Metric("pool", 0, MetricType.String, ":"),
-            "process_manager": Metric("process manager", 1, MetricType.String, ":"),
-            "start_since": Metric("start since", 3, MetricType.Integer, ":"),
-            "accepted_conn": Metric("accepted conn", 4, MetricType.String, ":"),
-            "listen_queue": Metric("listen queue", 5, MetricType.Integer, ":"),
-            "listen_queue_max": Metric("max listen queue", 6, MetricType.Integer, ":"),
-            "listen_queue_len": Metric("listen queue len", 7, MetricType.Integer, ":"),
-            "idle_processes": Metric("idle processes", 8, MetricType.Integer, ":"),
-            "active_processes": Metric("active processes", 9, MetricType.Integer, ":"),
-            "total_processes": Metric("total processes", 10, MetricType.Integer, ":"),
-            "active_processes_max": Metric("max active processes", 11, MetricType.Integer, ":"),
-            "max_children_reached": Metric("max children reached", 12, MetricType.Integer, ":"),
-            "slow_requests": Metric("slow requests", 13, MetricType.Integer, ":"),
+            "pool": Metric("pool", MetricType.String, 0, ":"),
+            "process_manager": Metric("process manager", MetricType.String, 1, ":"),
+            "start_since": Metric("start since", MetricType.Integer, 3, ":"),
+            "accepted_conn": Metric("accepted conn", MetricType.String, 4, ":"),
+            "listen_queue": Metric("listen queue", MetricType.Integer, 5, ":"),
+            "listen_queue_max": Metric("max listen queue", MetricType.Integer, 6, ":"),
+            "listen_queue_len": Metric("listen queue len", MetricType.Integer, 7, ":"),
+            "idle_processes": Metric("idle processes", MetricType.Integer, 8, ":"),
+            "active_processes": Metric("active processes", MetricType.Integer, 9, ":"),
+            "total_processes": Metric("total processes", MetricType.Integer, 10, ":"),
+            "active_processes_max": Metric("max active processes", MetricType.Integer, 11, ":"),
+            "max_children_reached": Metric("max children reached", MetricType.Integer, 12, ":"),
+            "slow_requests": Metric("slow requests", MetricType.Integer, 13, ":"),
         }
 
     def _get(self, metric=None, *args, **kwargs):

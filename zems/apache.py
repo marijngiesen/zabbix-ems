@@ -8,18 +8,18 @@ class Apache(Check):
 
     def _init_metrics(self):
         self.metrics = {
-            "workers_busy": Metric("BusyWorkers", 0, MetricType.Integer, ":"),
-            "workers_idle": Metric("IdleWorkers", 1, MetricType.Integer, ":"),
-            "workers_closing": Metric("C", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_dns": Metric("D", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_finishing": Metric("G", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_idlecleanup": Metric("I", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_keepalive": Metric("K", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_logging": Metric("L", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_openslot": Metric(".", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_reading": Metric("R", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_starting": Metric("S", 2, MetricType.Integer, ":", self._filter_data),
-            "workers_writing": Metric("W", 2, MetricType.Integer, ":", self._filter_data),
+            "workers_busy": Metric("BusyWorkers", MetricType.Integer, 0, ":"),
+            "workers_idle": Metric("IdleWorkers", MetricType.Integer, 1, ":"),
+            "workers_closing": Metric("C", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_dns": Metric("D", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_finishing": Metric("G", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_idlecleanup": Metric("I", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_keepalive": Metric("K", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_logging": Metric("L", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_openslot": Metric(".", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_reading": Metric("R", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_starting": Metric("S", MetricType.Integer, 2, ":", self._filter_data),
+            "workers_writing": Metric("W", MetricType.Integer, 2, ":", self._filter_data),
         }
 
     def _get(self, metric=None, *args, **kwargs):

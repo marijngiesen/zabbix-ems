@@ -10,67 +10,68 @@ class HAProxy(Check):
 
     def _init_metrics(self):
         self.metrics = {
-            "version": Metric("version", 1, MetricType.String, ":"),
-            "uptime_sec": Metric("uptime_sec", 7, MetricType.Integer, ":"),
-            "memmax_mb": Metric("memmax_mb", 8, MetricType.Integer, ":"),
-            "maxsock": Metric("maxsock", 10, MetricType.Integer, ":"),
-            "maxconn": Metric("maxconn", 11, MetricType.Integer, ":"),
-            "maxpipes": Metric("maxpipes", 12, MetricType.Integer, ":"),
-            "currconns": Metric("currconns", 13, MetricType.Integer, ":"),
-            "pipesused": Metric("pipesused", 14, MetricType.Integer, ":"),
-            "pipesfree": Metric("pipesfree", 15, MetricType.Integer, ":"),
-            "tasks": Metric("tasks", 16, MetricType.Integer, ":"),
-            "run_queue": Metric("run_queue", 17, MetricType.Integer, ":"),
-            "node": Metric("node", 18, MetricType.String, ":"),
-            "qcur": Metric("qcur", 2, MetricType.Integer, ",", self._filter_data),
-            "qmax": Metric("qmax", 3, MetricType.Integer, ",", self._filter_data),
-            "scur": Metric("scur", 4, MetricType.Integer, ",", self._filter_data),
-            "smax": Metric("smax", 5, MetricType.Integer, ",", self._filter_data),
-            "slim": Metric("slim", 6, MetricType.Integer, ",", self._filter_data),
-            "stot": Metric("stot", 7, MetricType.Integer, ",", self._filter_data),
-            "bin": Metric("bin", 8, MetricType.Integer, ",", self._filter_data),
-            "bout": Metric("bout", 9, MetricType.Integer, ",", self._filter_data),
-            "dreq": Metric("dreq", 10, MetricType.Integer, ",", self._filter_data),
-            "dresp": Metric("dresp", 11, MetricType.Integer, ",", self._filter_data),
-            "ereq": Metric("ereq", 12, MetricType.Integer, ",", self._filter_data),
-            "econ": Metric("econ", 13, MetricType.Integer, ",", self._filter_data),
-            "eresp": Metric("eresp", 14, MetricType.Integer, ",", self._filter_data),
-            "wretr": Metric("wretr", 15, MetricType.Integer, ",", self._filter_data),
-            "wredis": Metric("wredis", 16, MetricType.Integer, ",", self._filter_data),
-            "status": Metric("status", 17, MetricType.String, ",", self._filter_data),
-            "weight": Metric("weight", 18, MetricType.Integer, ",", self._filter_data),
-            "act": Metric("act", 19, MetricType.String, ",", self._filter_data),
-            "bck": Metric("bck", 20, MetricType.String, ",", self._filter_data),
-            "chkfail": Metric("chkfail", 21, MetricType.String, ",", self._filter_data),
-            "chkdown": Metric("chkdown", 22, MetricType.String, ",", self._filter_data),
-            "lastchg": Metric("lastchg", 23, MetricType.String, ",", self._filter_data),
-            "downtime": Metric("downtime", 24, MetricType.String, ",", self._filter_data),
-            "qlimit": Metric("qlimit", 25, MetricType.String, ",", self._filter_data),
-            "pid": Metric("pid", 26, MetricType.String, ",", self._filter_data),
-            "iid": Metric("iid", 27, MetricType.String, ",", self._filter_data),
-            "sid": Metric("sid", 28, MetricType.String, ",", self._filter_data),
-            "throttle": Metric("throttle", 29, MetricType.String, ",", self._filter_data),
-            "lbtot": Metric("lbtot", 30, MetricType.Integer, ",", self._filter_data),
-            "tracked": Metric("tracked", 31, MetricType.String, ",", self._filter_data),
-            "type": Metric("type", 32, MetricType.String, ",", self._filter_data),
-            "rate": Metric("rate", 33, MetricType.String, ",", self._filter_data),
-            "rate_lim": Metric("rate_lim", 34, MetricType.String, ",", self._filter_data),
-            "rate_max": Metric("rate_max", 35, MetricType.String, ",", self._filter_data),
-            "check_status": Metric("check_status", 36, MetricType.String, ",", self._filter_data),
-            "check_code": Metric("check_code", 37, MetricType.String, ",", self._filter_data),
-            "check_duration": Metric("check_duration", 38, MetricType.String, ",", self._filter_data),
-            "hrsp_1xx": Metric("hrsp_1xx", 39, MetricType.String, ",", self._filter_data),
-            "hrsp_2xx": Metric("hrsp_2xx", 40, MetricType.String, ",", self._filter_data),
-            "hrsp_3xx": Metric("hrsp_3xx", 41, MetricType.String, ",", self._filter_data),
-            "hrsp_4xx": Metric("hrsp_4xx", 42, MetricType.String, ",", self._filter_data),
-            "hrsp_5xx": Metric("hrsp_5xx", 43, MetricType.String, ",", self._filter_data),
-            "hrsp_other": Metric("hrsp_other", 44, MetricType.String, ",", self._filter_data),
-            "hanafail": Metric("hanafail", 45, MetricType.String, ",", self._filter_data),
-            "req_rate": Metric("req_rate", 46, MetricType.String, ",", self._filter_data),
-            "req_rate_max": Metric("req_rate_max", 47, MetricType.String, ",", self._filter_data),
-            "req_tot": Metric("req_tot", 48, MetricType.String, ",", self._filter_data),
-            "cli_abrt": Metric("cli_abrt", 49, MetricType.String, ",", self._filter_data),
-            "srv_abrt": Metric("srv_abrt", 50, MetricType.String, ",", self._filter_data),
+            "version": Metric("version", MetricType.String, 1, ":"),
+            "uptime_sec": Metric("uptime_sec", MetricType.Integer, 7, ":"),
+            "memmax_mb": Metric("memmax_mb", MetricType.Integer, 8, ":"),
+            "maxsock": Metric("maxsock", MetricType.Integer, 10, ":"),
+            "maxconn": Metric("maxconn", MetricType.Integer, 11, ":"),
+            "maxpipes": Metric("maxpipes", MetricType.Integer, 12, ":"),
+            "currconns": Metric("currconns", MetricType.Integer, 13, ":"),
+            "pipesused": Metric("pipesused", MetricType.Integer, 14, ":"),
+            "pipesfree": Metric("pipesfree", MetricType.Integer, 15, ":"),
+            "tasks": Metric("tasks", MetricType.Integer, 16, ":"),
+            "run_queue": Metric("run_queue", MetricType.Integer, 17, ":"),
+            "node": Metric("node", MetricType.String, 18, ":"),
+            "qcur": Metric("qcur", MetricType.Integer, 2, ",", self._filter_data),
+            "qmax": Metric("qmax", MetricType.Integer, 3, ",", self._filter_data),
+            "scur": Metric("scur", MetricType.Integer, 4, ",", self._filter_data),
+            "smax": Metric("smax", MetricType.Integer, 5, ",", self._filter_data),
+            "slim": Metric("slim", MetricType.Integer, 6, ",", self._filter_data),
+            "stot": Metric("stot", MetricType.Integer, 7, ",", self._filter_data),
+            "bin": Metric("bin", MetricType.Integer, 8, ",", self._filter_data),
+            "bout": Metric("bout", MetricType.Integer, 9, ",", self._filter_data),
+            "dreq": Metric("dreq", MetricType.Integer, 10, ",", self._filter_data),
+            "dresp": Metric("dresp", MetricType.Integer, 11, ",", self._filter_data),
+            "ereq": Metric("ereq", MetricType.Integer, 12, ",", self._filter_data),
+            "econ": Metric("econ", MetricType.Integer, 13, ",", self._filter_data),
+            "eresp": Metric("eresp", MetricType.Integer, 14, ",", self._filter_data),
+            "wretr": Metric("wretr", MetricType.Integer, 15, ",", self._filter_data),
+            "wredis": Metric("wredis", MetricType.Integer, 16, ",", self._filter_data),
+            "status": Metric("status", MetricType.String, 17, ",", self._filter_data),
+            "weight": Metric("weight", MetricType.Integer, 18, ",", self._filter_data),
+            "act": Metric("act", MetricType.String, 19, ",", self._filter_data),
+            "bck": Metric("bck", MetricType.String, 20, ",", self._filter_data),
+            "chkfail": Metric("chkfail", MetricType.String, 21, ",", self._filter_data),
+            "chkdown": Metric("chkdown", MetricType.String, 22, ",", self._filter_data),
+            "lastchg": Metric("lastchg", MetricType.String, 23, ",", self._filter_data),
+            "downtime": Metric("downtime", MetricType.String, 24, ",", self._filter_data),
+            "qlimit": Metric("qlimit", MetricType.String, 25, ",", self._filter_data),
+            "pid": Metric("pid", MetricType.String, 26, ",", self._filter_data),
+            "iid": Metric("iid", MetricType.String, 27, ",", self._filter_data),
+            "sid": Metric("sid", MetricType.String, 28, ",", self._filter_data),
+            "throttle": Metric("throttle", MetricType.String, 29, ",", self._filter_data),
+            "lbtot": Metric("lbtot", MetricType.Integer, 30, ",", self._filter_data),
+            "tracked": Metric("tracked", MetricType.String, 31, ",", self._filter_data),
+            "type": Metric("type", MetricType.String, 32, ",", self._filter_data),
+            "rate": Metric("rate", MetricType.String, 33, ",", self._filter_data),
+            "rate_lim": Metric("rate_lim", MetricType.String, 34, ",", self._filter_data),
+            "rate_max": Metric("rate_max", MetricType.String, 35, ",", self._filter_data),
+            "check_status": Metric("check_status", MetricType.String, 36, ",", self._filter_data),
+            "check_code": Metric("check_code", MetricType.String, 37, ",", self._filter_data),
+            "check_duration": Metric("check_duration", MetricType.String, 38, ",", self._filter_data),
+            "hrsp_1xx": Metric("hrsp_1xx", MetricType.String, 39, ",", self._filter_data),
+            "hrsp_2xx": Metric("hrsp_2xx", MetricType.String, 40, ",", self._filter_data),
+            "hrsp_3xx": Metric("hrsp_3xx", MetricType.String, 41, ",", self._filter_data),
+            "hrsp_4xx": Metric("hrsp_4xx", MetricType.String, 42, ",", self._filter_data),
+            "hrsp_5xx": Metric("hrsp_5xx", MetricType.String, 43, ",", self._filter_data),
+            "hrsp_other": Metric("hrsp_other", MetricType.String, 44, ",", self._filter_data),
+            "hanafail": Metric("hanafail", MetricType.String, 45, ",", self._filter_data),
+            "req_rate": Metric("req_rate", MetricType.String, 46, ",", self._filter_data),
+            "req_rate_max": Metric("req_rate_max", MetricType.String, 47, ",", self._filter_data),
+            "req_tot": Metric("req_tot", MetricType.String, 48, ",", self._filter_data),
+            "cli_abrt": Metric("cli_abrt", MetricType.String, 49, ",", self._filter_data),
+            "srv_abrt": Metric("srv_abrt", MetricType.String, 50, ",", self._filter_data),
+            "discovery": Metric("discovery", MetricType.Discovery, 1, ",", self._discovery),
         }
 
     def _get(self, metric=None, *args, **kwargs):
@@ -82,12 +83,14 @@ class HAProxy(Check):
 
     def _get_value(self, metric):
         if metric.filter_callback is not None:
-            metric.filter_callback(metric.separator)
-            value = self.test_data[metric.position]
+            if metric.type == MetricType.Discovery:
+                metric.filter_callback()
+                return self._correct_type(metric.type, self.test_data)
+            else:
+                metric.filter_callback(metric.separator)
+                return self._correct_type(metric.type, self.test_data[metric.position])
         else:
-            value = self.test_data[metric.position].split(metric.separator)[1]
-
-        return self._correct_type(metric.type, value)
+            return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
 
     def _load_data(self):
         self.test_data = Cache.read(self.name)
@@ -111,3 +114,10 @@ class HAProxy(Check):
             if self.pxname in values and self.svname in values:
                 self.test_data = values
 
+    def _discovery(self):
+        data = [value.strip().split(",", 2)[0:2]
+                for nr, value in enumerate(self.test_data[22:])
+                if "#" not in value and value.strip() != ""]
+
+        self.test_data = [{"{#PROXY}": item[0], "{#SERVER}": item[1]}
+                          for item in data]

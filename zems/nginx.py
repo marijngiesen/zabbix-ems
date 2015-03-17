@@ -8,13 +8,13 @@ class Nginx(Check):
 
     def _init_metrics(self):
         self.metrics = {
-            "connections_active": Metric("active connections", 0, MetricType.Integer, ":"),
-            "connections_reading": Metric("reading", 1, MetricType.Integer, " ", self._filter_data, linenumber=3),
-            "connections_writing": Metric("writing", 3, MetricType.Integer, " ", self._filter_data, linenumber=3),
-            "connections_waiting": Metric("waiting", 5, MetricType.Integer, " ", self._filter_data, linenumber=3),
-            "accepts": Metric("accepts", 0, MetricType.Integer, " ", self._filter_data, linenumber=2),
-            "handled": Metric("handled", 1, MetricType.Integer, " ", self._filter_data, linenumber=2),
-            "requests": Metric("requests", 2, MetricType.Integer, " ", self._filter_data, linenumber=2),
+            "connections_active": Metric("active connections", MetricType.Integer, 0, ":"),
+            "connections_reading": Metric("reading", MetricType.Integer, 1, " ", self._filter_data),
+            "connections_writing": Metric("writing", MetricType.Integer, 3, " ", self._filter_data),
+            "connections_waiting": Metric("waiting", MetricType.Integer, 5, " ", self._filter_data),
+            "accepts": Metric("accepts", MetricType.Integer, 0, " ", self._filter_data),
+            "handled": Metric("handled", MetricType.Integer, 1, " ", self._filter_data),
+            "requests": Metric("requests", MetricType.Integer, 2, " ", self._filter_data),
         }
 
     def _get(self, metric=None, *args, **kwargs):

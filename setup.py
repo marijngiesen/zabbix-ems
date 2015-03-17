@@ -17,7 +17,7 @@ setup(
     },
     requires=['requests', 'MySQLdb', 'enum34', 'commandr'],
     data_files=[
-        ('/etc/zabbix/zabbix-agent.d/', glob.glob('config/zabbix/*.conf')),
+        ('/etc/zems/zabbix/', glob.glob('config/zabbix/*.conf')),
         ('/etc/zems', glob.glob('config/*.conf')),
         ('/usr/share/zems/templates', glob.glob('templates/*.xml')),
         ('/usr/share/zems/doc/', ('README.md', 'LICENSE')),

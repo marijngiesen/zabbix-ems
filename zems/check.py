@@ -11,6 +11,7 @@
 
     Modified for use in Zabbix EMS by Marijn Giesen <marijn@studio-donder.nl>
 """
+import json
 import os
 import sys
 import logging
@@ -18,6 +19,7 @@ import logging.handlers
 import traceback
 import ConfigParser
 from enum import Enum
+import re
 
 
 class Check(object):
@@ -106,6 +108,8 @@ class Check(object):
             if len(value) == 0:
                 return 0
             return int(value)
+        elif type == MetricType.Discovery:
+            return self._to_discovery_output(value)
         else:
             raise CheckFail("Unknown return type")
 
@@ -136,11 +140,35 @@ class Check(object):
         self.logger.addHandler(h)
         self.logger.debug("created")
 
+    def _to_discovery_output(self, data):
+        # {
+        # "data":[
+        #
+        # { "{#FSNAME}":"\/",                           "{#FSTYPE}":"rootfs"   },
+        # { "{#FSNAME}":"\/sys",                        "{#FSTYPE}":"sysfs"    },
+        # { "{#FSNAME}":"\/proc",                       "{#FSTYPE}":"proc"     },
+        # { "{#FSNAME}":"\/dev",                        "{#FSTYPE}":"devtmpfs" },
+        #   { "{#FSNAME}":"\/dev\/pts",                   "{#FSTYPE}":"devpts"   },
+        #   { "{#FSNAME}":"\/",                           "{#FSTYPE}":"ext3"     },
+        #   { "{#FSNAME}":"\/lib\/init\/rw",              "{#FSTYPE}":"tmpfs"    },
+        #   { "{#FSNAME}":"\/dev\/shm",                   "{#FSTYPE}":"tmpfs"    },
+        #   { "{#FSNAME}":"\/home",                       "{#FSTYPE}":"ext3"     },
+        #   { "{#FSNAME}":"\/tmp",                        "{#FSTYPE}":"ext3"     },
+        #   { "{#FSNAME}":"\/usr",                        "{#FSTYPE}":"ext3"     },
+        #   { "{#FSNAME}":"\/var",                        "{#FSTYPE}":"ext3"     },
+        #   { "{#FSNAME}":"\/sys\/fs\/fuse\/connections", "{#FSTYPE}":"fusectl"  }
+        #
+        #   ]
+        # }
+
+        return json.dumps({"data": data})
+
 
 class MetricType(Enum):
     Integer = 0
     Float = 1
     String = 2
+    Discovery = 3
 
 
 class Metric(object):
@@ -151,13 +179,16 @@ class Metric(object):
     filter_callback = None
     kwargs = {}
 
-    def __init__(self, key, position, type, separator=None, filter_callback=None, **kwargs):
+    def __init__(self, key, type, position, separator=None, filter_callback=None, regex=None, **kwargs):
         self.key = key
         self.position = position
         self.type = type
         self.separator = separator
         self.filter_callback = filter_callback
         self.kwargs = kwargs
+
+        if regex is not None:
+            self.regex = re.compile(regex)
 
     def __repr__(self):
         return self.key
