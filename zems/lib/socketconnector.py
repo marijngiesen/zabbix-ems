@@ -12,12 +12,12 @@ class SocketConnector:
 
     def __init__(self, socket_file=None, host=None, port=None,
                  command=None):
-        self.socket_file = socket_file
-        self.host = host
-        self.port = int(port)
-        if self.socket_file is not None:
+        if socket_file is not None:
+            self.socket_file = socket_file
             self.family = AF_UNIX
         else:
+            self.host = host
+            self.port = int(port)
             self.family = AF_INET
         self.type = SOCK_STREAM
         self.command = command

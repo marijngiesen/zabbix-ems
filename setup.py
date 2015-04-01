@@ -15,7 +15,7 @@ setup(
             'zems = zems.main:main',
         ]
     },
-    requires=['requests', 'MySQLdb', 'enum34', 'commandr'],
+    install_requires=['requests', 'MySQL-python', 'enum34', 'commandr'],
     data_files=[
         ('/etc/zems/zabbix/', glob.glob('config/zabbix/*.conf')),
         ('/etc/zems', glob.glob('config/*.conf')),

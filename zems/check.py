@@ -27,7 +27,7 @@ class Check(object):
     config = None
     debug = False
     logger = None
-    confdir = "/etc/zems/config"
+    confdir = "/etc/zems"
 
     metrics = None
     test_data = None
