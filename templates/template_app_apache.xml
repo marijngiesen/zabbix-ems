@@ -637,7 +637,7 @@
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_closingconn]</key>
+                    <key>apache.stat[workers_closing]</key>
                     <delay>90</delay>
                     <history>90</history>
                     <trends>365</trends>
