@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='zems',
-    version='0.0.3',
+    version='0.0.4',
     packages=['zems', 'zems.lib'],
     url='https://github.com/marijngiesen/zabbix-ems',
     license='GPL',
