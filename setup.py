@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='zems',
-    version='0.0.8',
+    version='0.0.9',
     packages=['zems', 'zems.lib'],
     url='https://github.com/marijngiesen/zabbix-ems',
     license='GPL',
@@ -17,10 +17,4 @@ setup(
         ]
     },
     install_requires=['requests', 'enum34', 'commandr'],
-    data_files=[
-        ('config', glob.glob('config/*.conf')),
-        ('config/zabbix', glob.glob('config/zabbix/*.conf')),
-        ('templates', glob.glob('templates/*.xml')),
-        # ('/usr/share/zems/doc/', ('README.md', 'LICENSE')),
-    ]
 )

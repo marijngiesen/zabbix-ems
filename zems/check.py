@@ -121,8 +121,7 @@ class Check(object):
     def _set_logger_options(self):
         formatter = logging.Formatter("[%(name)s] %(asctime)s - %(levelname)s: %(message)s")
 
-        # setting file handler (max 10 files of 1MB)
-        h = logging.handlers.RotatingFileHandler(self.config.get("logfile", "/var/log/zems.log"), "a", 1 * 1024 * 1024, 10)
+        h = logging.StreamHandler(open(self.config.get("logfile", "/var/log/zems.log"), "a"))
 
         if self.debug:
             # setting stream handler
@@ -148,8 +147,8 @@ class Check(object):
         # { "{#FSNAME}":"\/sys",                        "{#FSTYPE}":"sysfs"    },
         # { "{#FSNAME}":"\/proc",                       "{#FSTYPE}":"proc"     },
         # { "{#FSNAME}":"\/dev",                        "{#FSTYPE}":"devtmpfs" },
-        #   { "{#FSNAME}":"\/dev\/pts",                   "{#FSTYPE}":"devpts"   },
-        #   { "{#FSNAME}":"\/",                           "{#FSTYPE}":"ext3"     },
+        # { "{#FSNAME}":"\/dev\/pts",                   "{#FSTYPE}":"devpts"   },
+        # { "{#FSNAME}":"\/",                           "{#FSTYPE}":"ext3"     },
         #   { "{#FSNAME}":"\/lib\/init\/rw",              "{#FSTYPE}":"tmpfs"    },
         #   { "{#FSNAME}":"\/dev\/shm",                   "{#FSTYPE}":"tmpfs"    },
         #   { "{#FSNAME}":"\/home",                       "{#FSTYPE}":"ext3"     },
