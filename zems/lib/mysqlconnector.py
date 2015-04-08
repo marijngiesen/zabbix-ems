@@ -1,4 +1,10 @@
-import MySQLdb
+try:
+    import MySQLdb
+except ImportError:
+    import sys
+    MySQLdb = None
+    print "Error: MySQL-python module cannot be loaded"
+    sys.exit(1)
 
 
 class MySQLConnector:

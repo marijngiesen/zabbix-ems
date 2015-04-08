@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='zems',
-    version='0.0.4',
+    version='0.0.7',
     packages=['zems', 'zems.lib'],
     url='https://github.com/marijngiesen/zabbix-ems',
     license='GPL',
@@ -16,7 +16,7 @@ setup(
             'zems = zems.main:main',
         ]
     },
-    install_requires=['requests', 'MySQL-python', 'enum34', 'commandr'],
+    install_requires=['requests', 'enum34', 'commandr'],
     data_files=[
         ('/etc/zems/zabbix/', glob.glob('config/zabbix/*.conf')),
         ('/etc/zems', glob.glob('config/*.conf')),
