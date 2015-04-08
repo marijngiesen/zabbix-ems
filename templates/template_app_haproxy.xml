@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-04-08T08:04:22Z</date>
+    <date>2015-04-08T13:09:50Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -24,7 +24,7 @@
             </applications>
             <items>
                 <item>
-                    <name>Connections</name>
+                    <name>HAProxy: Connections</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -67,7 +67,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Free pipes</name>
+                    <name>HAProxy: Free pipes</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -110,7 +110,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Maximum memory usage</name>
+                    <name>HAProxy: Maximum memory usage</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -153,7 +153,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Maximum number of connections</name>
+                    <name>HAProxy: Maximum number of connections</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -196,7 +196,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Maximum number of pipes</name>
+                    <name>HAProxy: Maximum number of pipes</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -239,7 +239,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Maximum number of sockets</name>
+                    <name>HAProxy: Maximum number of sockets</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -282,7 +282,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Node</name>
+                    <name>HAProxy: Node</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -325,7 +325,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Run queue</name>
+                    <name>HAProxy: Run queue</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -368,7 +368,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Tasks</name>
+                    <name>HAProxy: Tasks</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -411,7 +411,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Uptime</name>
+                    <name>HAProxy: Uptime</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -454,7 +454,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Used pipes</name>
+                    <name>HAProxy: Used pipes</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -497,7 +497,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Version</name>
+                    <name>HAProxy: Version</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -575,7 +575,7 @@
                     <description>Discovery of proxies and servers</description>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Backend connection errors on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Backend connection errors on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -618,7 +618,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Connection retry count on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Connection retry count on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -661,7 +661,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Current queue length on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Current queue length on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -704,7 +704,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Current sessions on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Current sessions on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -747,7 +747,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Health check status of {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Health check status of {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -790,7 +790,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Incoming traffic on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Incoming traffic on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -833,7 +833,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Max queue length on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Max queue length on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -876,7 +876,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Max sessions on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Max sessions on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -919,7 +919,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Max sessions per second on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Max sessions per second on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -962,7 +962,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Outgoing traffic on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Outgoing traffic on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1005,7 +1005,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Request errors on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Request errors on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1048,7 +1048,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Request redispatch count on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Request redispatch count on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1091,7 +1091,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Requests denied on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Requests denied on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1134,7 +1134,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Response errors on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Response errors on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1177,7 +1177,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Responses denied on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Responses denied on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1220,7 +1220,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Sessions per second on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Sessions per second on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1263,7 +1263,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Status of {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Status of {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1306,7 +1306,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Total sessions on {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Total sessions on {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
@@ -1349,7 +1349,7 @@
                             <logtimefmt/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Type of {#PROXY}/{#SERVER}</name>
+                            <name>HAProxy: Type of {#PROXY}/{#SERVER}</name>
                             <type>0</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
