@@ -1,91 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-04-13T22:14:41Z</date>
+    <date>2015-04-13T21:58:34Z</date>
     <groups>
-        <group>
-            <name>Application</name>
-        </group>
         <group>
             <name>Templates</name>
         </group>
     </groups>
     <templates>
         <template>
-            <template>Template App Apache</template>
-            <name>Template App Apache</name>
+            <template>Template App RdiffBackup</template>
+            <name>Template App RdiffBackup</name>
             <description/>
             <groups>
-                <group>
-                    <name>Application</name>
-                </group>
                 <group>
                     <name>Templates</name>
                 </group>
             </groups>
             <applications>
                 <application>
-                    <name>Apache</name>
+                    <name>RdiffBackup</name>
                 </application>
             </applications>
             <items>
                 <item>
-                    <name>Apache: Busy workers</name>
+                    <name>RdiffBackup: Backup end time</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_busy]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Bytes per request</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[bytes_per_req]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[end_time]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>unixtime</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -109,235 +60,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Bytes per second</name>
+                    <name>RdiffBackup: Backup run time</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[bytes_per_sec]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units>Bps</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: CPU load</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[cpuload]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Idle cleanup workers</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_idlecleanup]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Idle workers</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_idle]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Open slots for workers</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_openslot]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: ping</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.ping</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[elapsed_time]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -367,26 +103,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Requests per second</name>
+                    <name>RdiffBackup: Backup start time</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[req_per_sec]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[start_time]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>unixtime</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -410,20 +146,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Starting workers</name>
+                    <name>RdiffBackup: Number of changed files</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_starting]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[changed_files]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -453,20 +189,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Total number of requests</name>
+                    <name>RdiffBackup: Number of deleted files</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[total_accesses]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[deleted_files]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -496,63 +232,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Traffic</name>
+                    <name>RdiffBackup: Number of errors</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[total_traffic]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>KB</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Uptime</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[uptime]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[errors]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -582,20 +275,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Workers closing connection</name>
+                    <name>RdiffBackup: Number of increment files</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_closing]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[increment_files]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -625,20 +318,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Workers gracefully finishing</name>
+                    <name>RdiffBackup: Number of mirror files</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_finishing]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[mirror_files]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -668,20 +361,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Workers in keepalive waiting</name>
+                    <name>RdiffBackup: Number of new files</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_keepalive]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[new_files]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -711,20 +404,20 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Workers in logging state</name>
+                    <name>RdiffBackup: Number of source files</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_logging]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[source_files]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -754,26 +447,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Workers reading request</name>
+                    <name>RdiffBackup: Size of changed files on mirror</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_reading]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[changed_mirror_size]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>B</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -797,26 +490,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Workers resolving dns</name>
+                    <name>RdiffBackup: Size of changed files on source</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_dns]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[changed_source_size]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>B</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -840,26 +533,26 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Workers writing</name>
+                    <name>RdiffBackup: Size of deleted files</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_writing]</key>
-                    <delay>60</delay>
+                    <key>rdiffbackup.stat[deleted_file_size]</key>
+                    <delay>43200</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
                     <allowed_hosts/>
-                    <units/>
+                    <units>B</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -883,7 +576,222 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>RdiffBackup</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>RdiffBackup: Size of increment files</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>rdiffbackup.stat[increment_file_size]</key>
+                    <delay>43200</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>RdiffBackup</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>RdiffBackup: Size of mirror files</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>rdiffbackup.stat[mirror_file_size]</key>
+                    <delay>43200</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>RdiffBackup</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>RdiffBackup: Size of new files</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>rdiffbackup.stat[new_file_size]</key>
+                    <delay>43200</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>RdiffBackup</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>RdiffBackup: Size of source files</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>rdiffbackup.stat[source_file_size]</key>
+                    <delay>43200</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>RdiffBackup</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>RdiffBackup: Total destination size change</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>rdiffbackup.stat[total_dest_size_change]</key>
+                    <delay>43200</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>RdiffBackup</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -896,289 +804,4 @@
             <screens/>
         </template>
     </templates>
-    <triggers>
-        <trigger>
-            <expression>{Template App Apache:apache.ping.last(0)}=0</expression>
-            <name>Apache is down on {HOSTNAME}</name>
-            <url/>
-            <status>0</status>
-            <priority>5</priority>
-            <description>Check your webserver.</description>
-            <type>0</type>
-            <dependencies/>
-        </trigger>
-        <trigger>
-            <expression>{Template App Apache:apache.stat[workers_idle].avg(300)}&lt;3</expression>
-            <name>Low number of apache idle workers</name>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description>Best practice is to have at least 5 idle workers ready for accepting connection.
-Probably you should tune your mpm settings.</description>
-            <type>0</type>
-            <dependencies/>
-        </trigger>
-    </triggers>
-    <graphs>
-        <graph>
-            <name>Apache load</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>0</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>009900</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[total_traffic]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CC0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[total_accesses]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache ping</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>0</show_work_period>
-            <show_triggers>0</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>2</drawtype>
-                    <color>009900</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.ping</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache workers</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>AAAAAA</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_idlecleanup]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>1</sortorder>
-                    <drawtype>3</drawtype>
-                    <color>0000CC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_logging]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>2</drawtype>
-                    <color>009900</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_idle]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>3</sortorder>
-                    <drawtype>2</drawtype>
-                    <color>EE0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_busy]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>4</sortorder>
-                    <drawtype>4</drawtype>
-                    <color>00CC00</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_reading]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>5</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CC00CC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_closing]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>6</sortorder>
-                    <drawtype>3</drawtype>
-                    <color>CC00CC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_dns]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>7</sortorder>
-                    <drawtype>4</drawtype>
-                    <color>FF9999</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_writing]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>8</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>0000DD</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_starting]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>9</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>DDDD00</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_finishing]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>10</sortorder>
-                    <drawtype>3</drawtype>
-                    <color>888888</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_keepalive]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache workers open slots</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>2</drawtype>
-                    <color>00EEEE</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_openslot]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-    </graphs>
 </zabbix_export>

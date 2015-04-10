@@ -8,30 +8,26 @@ class Nginx(Check):
 
     def _init_metrics(self):
         self.metrics = {
-            "connections_active": Metric("active connections", MetricType.Integer, 0, ":"),
-            "connections_reading": Metric("reading", MetricType.Integer, 1, " ", self._filter_data, linenumber=1),
-            "connections_writing": Metric("writing", MetricType.Integer, 3, " ", self._filter_data, linenumber=1),
-            "connections_waiting": Metric("waiting", MetricType.Integer, 5, " ", self._filter_data, linenumber=1),
-            "accepts": Metric("accepts", MetricType.Integer, 0, " ", self._filter_data, linenumber=2),
-            "handled": Metric("handled", MetricType.Integer, 1, " ", self._filter_data, linenumber=2),
-            "requests": Metric("requests", MetricType.Integer, 2, " ", self._filter_data, linenumber=2),
+            "connections_active": Metric(MetricType.Integer, regex="Active connections: ([0-9]+)"),
+            "connections_reading": Metric(MetricType.Integer, regex="Reading: ([0-9]+)"),
+            "connections_writing": Metric(MetricType.Integer, regex="Writing: ([0-9]+)"),
+            "connections_waiting": Metric(MetricType.Integer, regex="Waiting: ([0-9]+)"),
+            "accepts": Metric(MetricType.Integer, linenumber=2, position=0, separator=" "),
+            "handled": Metric(MetricType.Integer, linenumber=2, position=1, separator=" "),
+            "requests": Metric(MetricType.Integer, linenumber=2, position=2, separator=" "),
         }
 
     def _get(self, metric=None, *args, **kwargs):
-        self.test_data = self._load_data()
+        self._load_data()
         return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
-        if metric.filter_callback is not None:
-            metric.filter_callback(metric.kwargs.get("linenumber"), metric.separator)
-            return self._correct_type(metric.type, self.test_data[metric.position])
-
-        return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
+        return self._correct_type(metric.type, metric.parser.get_value(self.test_data))
 
     def _load_data(self):
         self.test_data = Cache.read(self.name)
         if self.test_data is not None:
-            return self.test_data
+            return
 
         url = "%s://%s:%s%s" % (
             self.config.get("proto", "http"), self.config.get("host", "localhost"), self.config.get("port", "80"),
@@ -43,12 +39,5 @@ class Nginx(Check):
         if data.status_code != 200:
             raise CheckFail("Unable to retrieve data (error code: %s)" % data.status_code)
 
-        data = data.text.strip()
-        Cache.write(self.name, data)
-
-        return data.split("\n")
-
-    def _filter_data(self, linenumber, separator):
-        self.test_data = self.test_data[linenumber].strip().split(separator)
-
-
+        self.test_data = data.text.strip()
+        Cache.write(self.name, self.test_data)

@@ -14,13 +14,12 @@ class MySQLConnector:
     user = None
     passwd = None
     db = None
-    query = None
     connection = None
 
     def __init__(self, socket_file=None, host=None, port=None, user="", passwd="", db=""):
         self.socket_file = socket_file
         self.host = host
-        self.port = port
+        self.port = int(port)
         self.user = user
         self.passwd = passwd
         self.db = db

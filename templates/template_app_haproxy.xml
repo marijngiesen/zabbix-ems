@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-04-08T13:09:50Z</date>
+    <date>2015-04-13T21:57:48Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -547,7 +547,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>haproxy.discovery</key>
-                    <delay>30</delay>
+                    <delay>3600</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>

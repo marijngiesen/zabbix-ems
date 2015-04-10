@@ -11,15 +11,15 @@
 
     Modified for use in Zabbix EMS by Marijn Giesen <marijn@studio-donder.nl>
 """
-import json
 import os
 import sys
-import logging
-import logging.handlers
+import json
 import traceback
 import ConfigParser
+
 from enum import Enum
-import re
+from lib.parser import Parser
+from lib.logger import Logger
 
 
 class Check(object):
@@ -31,7 +31,7 @@ class Check(object):
 
     metrics = None
     test_data = None
-    test_data_filtered = None
+    default_value = {}
 
     def __init__(self, name=None):
         if name is not None:
@@ -44,10 +44,15 @@ class Check(object):
         if self.config.get('debug', False):
             self.debug = True
 
-        self.logger = logging.getLogger(self.__class__.__name__)
-        self._set_logger_options()
-
+        self.logger = Logger.get(self.__class__.__name__, self.config.get("logfile", Logger.logfile), self.debug)
         self.logger.debug("config file: %s" % os.path.join(self.confdir, self.name + ".conf"))
+
+        self.default_value = {
+            MetricType.Integer: 0,
+            MetricType.Float: 0.0,
+            MetricType.String: "",
+            MetricType.Discovery: []
+        }
 
         self._init_metrics()
 
@@ -96,70 +101,29 @@ class Check(object):
             self.logger.exception("Need root privileges to perform this check")
             sys.exit(1)
 
-    def _correct_type(self, type, value):
-        value = str(value)
-        if type == MetricType.String:
-            return value.strip()
-        elif type == MetricType.Float:
-            if len(value) == 0:
-                return 0.0
-            return float(value)
-        elif type == MetricType.Integer:
-            if len(value) == 0:
-                return 0
-            return int(value)
-        elif type == MetricType.Discovery:
-            return self._to_discovery_output(value)
-        else:
-            raise CheckFail("Unknown return type")
+    def _correct_type(self, metric_type, value):
+        try:
+            if metric_type == MetricType.String:
+                return str(value.strip())
+            elif metric_type == MetricType.Float:
+                return float(value)
+            elif metric_type == MetricType.Integer:
+                return int(value)
+            elif metric_type == MetricType.Discovery:
+                return self._to_discovery_output(value)
+            else:
+                raise CheckFail("Unknown return type")
+        except TypeError:
+            return self.default_value[metric_type]
+        except ValueError:
+            return self.default_value[metric_type]
 
     def _get_config(self):
         config = MyConfigParser()
         config.read(os.path.join(self.confdir, self.name + ".conf"))
         return config
 
-    def _set_logger_options(self):
-        formatter = logging.Formatter("[%(name)s] %(asctime)s - %(levelname)s: %(message)s")
-
-        h = logging.StreamHandler(open(self.config.get("logfile", "/var/log/zems.log"), "a"))
-
-        if self.debug:
-            # setting stream handler
-            sh = logging.StreamHandler()
-            sh.setLevel(logging.DEBUG)
-            self.logger.setLevel(logging.DEBUG)
-            sh.setFormatter(formatter)
-            h.setLevel(logging.DEBUG)
-            self.logger.addHandler(sh)
-        else:
-            self.logger.setLevel(logging.WARN)
-            h.setLevel(logging.WARN)
-
-        h.setFormatter(formatter)
-        self.logger.addHandler(h)
-        self.logger.debug("created")
-
     def _to_discovery_output(self, data):
-        # {
-        # "data":[
-        #
-        # { "{#FSNAME}":"\/",                           "{#FSTYPE}":"rootfs"   },
-        # { "{#FSNAME}":"\/sys",                        "{#FSTYPE}":"sysfs"    },
-        # { "{#FSNAME}":"\/proc",                       "{#FSTYPE}":"proc"     },
-        # { "{#FSNAME}":"\/dev",                        "{#FSTYPE}":"devtmpfs" },
-        # { "{#FSNAME}":"\/dev\/pts",                   "{#FSTYPE}":"devpts"   },
-        # { "{#FSNAME}":"\/",                           "{#FSTYPE}":"ext3"     },
-        #   { "{#FSNAME}":"\/lib\/init\/rw",              "{#FSTYPE}":"tmpfs"    },
-        #   { "{#FSNAME}":"\/dev\/shm",                   "{#FSTYPE}":"tmpfs"    },
-        #   { "{#FSNAME}":"\/home",                       "{#FSTYPE}":"ext3"     },
-        #   { "{#FSNAME}":"\/tmp",                        "{#FSTYPE}":"ext3"     },
-        #   { "{#FSNAME}":"\/usr",                        "{#FSTYPE}":"ext3"     },
-        #   { "{#FSNAME}":"\/var",                        "{#FSTYPE}":"ext3"     },
-        #   { "{#FSNAME}":"\/sys\/fs\/fuse\/connections", "{#FSTYPE}":"fusectl"  }
-        #
-        #   ]
-        # }
-
         return json.dumps({"data": data})
 
 
@@ -171,26 +135,24 @@ class MetricType(Enum):
 
 
 class Metric(object):
-    key = None
-    position = None
     type = None
-    separator = None
-    filter_callback = None
+    parser = None
+    callback = None
     kwargs = {}
 
-    def __init__(self, key, type, position, separator=None, filter_callback=None, regex=None, **kwargs):
-        self.key = key
-        self.position = position
-        self.type = type
-        self.separator = separator
-        self.filter_callback = filter_callback
+    def __init__(self, metric_type, callback=None, regex=None, position=None, linenumber=None, separator=None,
+                 **kwargs):
+        self.type = metric_type
         self.kwargs = kwargs
 
-        if regex is not None:
-            self.regex = re.compile(regex)
+        if metric_type == MetricType.Discovery and callback is None:
+            raise ValueError(
+                "Type of metric is discovery, but no callback specified. Discovery metrics always need a callback.")
 
-    def __repr__(self):
-        return self.key
+        if callback is not None:
+            self.callback = callback
+
+        self.parser = Parser(regex=regex, position=position, linenumber=linenumber, separator=separator)
 
 
 class MyConfigParser(ConfigParser.ConfigParser):

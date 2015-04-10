@@ -1,4 +1,5 @@
 import os
+import pickle
 from time import time
 
 
@@ -8,8 +9,13 @@ class Cache:
 
     @staticmethod
     def write(name, data):
-        with open("/tmp/zems-%s" % name, "w") as tmpfile:
-            tmpfile.writelines(data)
+        try:
+            with open("/tmp/zems-%s" % name, "w") as tmpfile:
+                pickle.dump(data, tmpfile)
+        except OSError:
+            pass
+        except pickle.PickleError:
+            pass
 
     @staticmethod
     def read(name, ttl=59):
@@ -18,8 +24,10 @@ class Cache:
 
         try:
             with open("/tmp/zems-%s" % name, "r") as tmpfile:
-                return tmpfile.readlines()
+                return pickle.load(tmpfile)
         except OSError:
+            return None
+        except pickle.PickleError:
             return None
 
     @staticmethod

@@ -1,43 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-04-13T22:14:41Z</date>
+    <date>2015-04-13T21:59:01Z</date>
     <groups>
-        <group>
-            <name>Application</name>
-        </group>
         <group>
             <name>Templates</name>
         </group>
     </groups>
     <templates>
         <template>
-            <template>Template App Apache</template>
-            <name>Template App Apache</name>
+            <template>Template App Redis</template>
+            <name>Template App Redis</name>
             <description/>
             <groups>
-                <group>
-                    <name>Application</name>
-                </group>
                 <group>
                     <name>Templates</name>
                 </group>
             </groups>
             <applications>
                 <application>
-                    <name>Apache</name>
+                    <name>Redis</name>
                 </application>
             </applications>
             <items>
                 <item>
-                    <name>Apache: Busy workers</name>
+                    <name>Redis: Blocked Clients</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_busy]</key>
+                    <key>redis.stat[blocked_clients]</key>
                     <delay>60</delay>
-                    <history>7</history>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>2</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Changes Since Last Save</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[changes_since_last_save]</key>
+                    <delay>60</delay>
+                    <history>30</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
@@ -66,27 +103,543 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>Redis</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Bytes per request</name>
+                    <name>Redis: Client Biggest Input Buffer</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[bytes_per_req]</key>
+                    <key>redis.stat[client_biggest_input_buf]</key>
                     <delay>60</delay>
-                    <history>7</history>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Client Longest Output List</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[client_longest_output_list]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Commands/sec</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[total_commands_processed]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Connected Clients</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[connected_clients]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Connected Slaves</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[connected_slaves]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Connections/sec</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[total_connections_received]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Evicted Keys</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[evicted_keys]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Expired Keys</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[expired_keys]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Keyspace Hits</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[keyspace_hits]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Keyspace Misses</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[keyspace_misses]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Memory Fragmentation Ratio</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[mem_fragmentation_ratio]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Total Allocated memory</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[used_memory_rss]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Used CPU Sys</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[used_cpu_sys]</key>
+                    <delay>60</delay>
+                    <history>30</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
-                    <delta>0</delta>
+                    <delta>1</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -109,70 +662,27 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>Redis</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Bytes per second</name>
+                    <name>Redis: Used CPU Sys Childrens</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[bytes_per_sec]</key>
+                    <key>redis.stat[used_cpu_sys_childrens]</key>
                     <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units>Bps</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: CPU load</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[cpuload]</key>
-                    <delay>60</delay>
-                    <history>7</history>
+                    <history>30</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
-                    <delta>0</delta>
+                    <delta>1</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
                     <snmpv3_securitylevel>0</snmpv3_securitylevel>
@@ -195,198 +705,112 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>Redis</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Idle cleanup workers</name>
+                    <name>Redis: Used CPU User</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_idlecleanup]</key>
+                    <key>redis.stat[used_cpu_user]</key>
                     <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Idle workers</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_idle]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Open slots for workers</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_openslot]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: ping</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.ping</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>0</value_type>
-                    <allowed_hosts/>
-                    <units>s</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Requests per second</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[req_per_sec]</key>
-                    <delay>60</delay>
-                    <history>7</history>
+                    <history>30</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Used CPU User Childrens</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[used_cpu_user_childrens]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>0</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>1</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Redis</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Redis: Used memory</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>redis.stat[used_memory]</key>
+                    <delay>60</delay>
+                    <history>30</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units>B</units>
                     <delta>0</delta>
                     <snmpv3_contextname/>
                     <snmpv3_securityname/>
@@ -410,25 +834,25 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
+                            <name>Redis</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Apache: Starting workers</name>
+                    <name>Redis is running</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>apache.stat[workers_starting]</key>
+                    <key>proc.num[redis-server]</key>
                     <delay>60</delay>
-                    <history>7</history>
+                    <history>30</history>
                     <trends>365</trends>
                     <status>0</status>
                     <value_type>3</value_type>
-                    <allowed_hosts/>
+                    <allowed_hosts>localhost</allowed_hosts>
                     <units/>
                     <delta>0</delta>
                     <snmpv3_contextname/>
@@ -438,7 +862,7 @@
                     <snmpv3_authpassphrase/>
                     <snmpv3_privprotocol>0</snmpv3_privprotocol>
                     <snmpv3_privpassphrase/>
-                    <formula>1</formula>
+                    <formula>0</formula>
                     <delay_flex/>
                     <params/>
                     <ipmi_sensor/>
@@ -453,519 +877,190 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Total number of requests</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[total_accesses]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Traffic</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[total_traffic]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units>KB</units>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Uptime</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[uptime]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Workers closing connection</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_closing]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Workers gracefully finishing</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_finishing]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Workers in keepalive waiting</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_keepalive]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Workers in logging state</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_logging]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Workers reading request</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_reading]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Workers resolving dns</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_dns]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
-                        </application>
-                    </applications>
-                    <valuemap/>
-                    <logtimefmt/>
-                </item>
-                <item>
-                    <name>Apache: Workers writing</name>
-                    <type>0</type>
-                    <snmp_community/>
-                    <multiplier>0</multiplier>
-                    <snmp_oid/>
-                    <key>apache.stat[workers_writing]</key>
-                    <delay>60</delay>
-                    <history>7</history>
-                    <trends>365</trends>
-                    <status>0</status>
-                    <value_type>3</value_type>
-                    <allowed_hosts/>
-                    <units/>
-                    <delta>0</delta>
-                    <snmpv3_contextname/>
-                    <snmpv3_securityname/>
-                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
-                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
-                    <snmpv3_authpassphrase/>
-                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
-                    <snmpv3_privpassphrase/>
-                    <formula>1</formula>
-                    <delay_flex/>
-                    <params/>
-                    <ipmi_sensor/>
-                    <data_type>0</data_type>
-                    <authtype>0</authtype>
-                    <username/>
-                    <password/>
-                    <publickey/>
-                    <privatekey/>
-                    <port/>
-                    <description/>
-                    <inventory_link>0</inventory_link>
-                    <applications>
-                        <application>
-                            <name>Apache</name>
+                            <name>Redis</name>
                         </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
             </items>
-            <discovery_rules/>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>Database discovery</name>
+                    <type>0</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>redis.discovery</key>
+                    <delay>3600</delay>
+                    <status>0</status>
+                    <allowed_hosts/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <filter>
+                        <evaltype>0</evaltype>
+                        <formula/>
+                        <conditions/>
+                    </filter>
+                    <lifetime>30</lifetime>
+                    <description/>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>Redis: Average Time-To-Live in database {#DB}</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>redis.stat[avg_ttl,{#DB}]</key>
+                            <delay>60</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Redis</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Redis: Number of expires in database {#DB}</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>redis.stat[expires,{#DB}]</key>
+                            <delay>60</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Redis</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Redis: Number of keys in database {#DB}</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>redis.stat[keys,{#DB}]</key>
+                            <delay>60</delay>
+                            <history>7</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Redis</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                        </item_prototype>
+                    </item_prototypes>
+                    <trigger_prototypes/>
+                    <graph_prototypes/>
+                    <host_prototypes/>
+                </discovery_rule>
+            </discovery_rules>
             <macros/>
             <templates/>
             <screens/>
         </template>
     </templates>
-    <triggers>
-        <trigger>
-            <expression>{Template App Apache:apache.ping.last(0)}=0</expression>
-            <name>Apache is down on {HOSTNAME}</name>
-            <url/>
-            <status>0</status>
-            <priority>5</priority>
-            <description>Check your webserver.</description>
-            <type>0</type>
-            <dependencies/>
-        </trigger>
-        <trigger>
-            <expression>{Template App Apache:apache.stat[workers_idle].avg(300)}&lt;3</expression>
-            <name>Low number of apache idle workers</name>
-            <url/>
-            <status>0</status>
-            <priority>2</priority>
-            <description>Best practice is to have at least 5 idle workers ready for accepting connection.
-Probably you should tune your mpm settings.</description>
-            <type>0</type>
-            <dependencies/>
-        </trigger>
-    </triggers>
     <graphs>
         <graph>
-            <name>Apache load</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>0</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>009900</color>
-                    <yaxisside>1</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[total_traffic]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>CC0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[total_accesses]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache ping</name>
+            <name>Redis: commands</name>
             <width>900</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
@@ -977,7 +1072,7 @@ Probably you should tune your mpm settings.</description>
             <show_3d>0</show_3d>
             <percent_left>0.0000</percent_left>
             <percent_right>0.0000</percent_right>
-            <ymin_type_1>1</ymin_type_1>
+            <ymin_type_1>0</ymin_type_1>
             <ymax_type_1>0</ymax_type_1>
             <ymin_item_1>0</ymin_item_1>
             <ymax_item_1>0</ymax_item_1>
@@ -985,25 +1080,25 @@ Probably you should tune your mpm settings.</description>
                 <graph_item>
                     <sortorder>0</sortorder>
                     <drawtype>2</drawtype>
-                    <color>009900</color>
+                    <color>00cc00</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template App Apache</host>
-                        <key>apache.ping</key>
+                        <host>Template App Redis</host>
+                        <key>redis.stat[total_commands_processed]</key>
                     </item>
                 </graph_item>
             </graph_items>
         </graph>
         <graph>
-            <name>Apache workers</name>
+            <name>Redis: memory</name>
             <width>900</width>
             <height>200</height>
             <yaxismin>0.0000</yaxismin>
             <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
+            <show_work_period>0</show_work_period>
+            <show_triggers>0</show_triggers>
             <type>0</type>
             <show_legend>1</show_legend>
             <show_3d>0</show_3d>
@@ -1017,165 +1112,25 @@ Probably you should tune your mpm settings.</description>
                 <graph_item>
                     <sortorder>0</sortorder>
                     <drawtype>0</drawtype>
-                    <color>AAAAAA</color>
+                    <color>00cc00</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_idlecleanup]</key>
+                        <host>Template App Redis</host>
+                        <key>redis.stat[used_memory]</key>
                     </item>
                 </graph_item>
                 <graph_item>
                     <sortorder>1</sortorder>
-                    <drawtype>3</drawtype>
-                    <color>0000CC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_logging]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>2</sortorder>
-                    <drawtype>2</drawtype>
-                    <color>009900</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_idle]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>3</sortorder>
-                    <drawtype>2</drawtype>
-                    <color>EE0000</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_busy]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>4</sortorder>
-                    <drawtype>4</drawtype>
-                    <color>00CC00</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_reading]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>5</sortorder>
                     <drawtype>0</drawtype>
-                    <color>CC00CC</color>
+                    <color>0066b3</color>
                     <yaxisside>0</yaxisside>
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_closing]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>6</sortorder>
-                    <drawtype>3</drawtype>
-                    <color>CC00CC</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_dns]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>7</sortorder>
-                    <drawtype>4</drawtype>
-                    <color>FF9999</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_writing]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>8</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>0000DD</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_starting]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>9</sortorder>
-                    <drawtype>0</drawtype>
-                    <color>DDDD00</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_finishing]</key>
-                    </item>
-                </graph_item>
-                <graph_item>
-                    <sortorder>10</sortorder>
-                    <drawtype>3</drawtype>
-                    <color>888888</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_keepalive]</key>
-                    </item>
-                </graph_item>
-            </graph_items>
-        </graph>
-        <graph>
-            <name>Apache workers open slots</name>
-            <width>900</width>
-            <height>200</height>
-            <yaxismin>0.0000</yaxismin>
-            <yaxismax>100.0000</yaxismax>
-            <show_work_period>1</show_work_period>
-            <show_triggers>1</show_triggers>
-            <type>0</type>
-            <show_legend>1</show_legend>
-            <show_3d>0</show_3d>
-            <percent_left>0.0000</percent_left>
-            <percent_right>0.0000</percent_right>
-            <ymin_type_1>0</ymin_type_1>
-            <ymax_type_1>0</ymax_type_1>
-            <ymin_item_1>0</ymin_item_1>
-            <ymax_item_1>0</ymax_item_1>
-            <graph_items>
-                <graph_item>
-                    <sortorder>0</sortorder>
-                    <drawtype>2</drawtype>
-                    <color>00EEEE</color>
-                    <yaxisside>0</yaxisside>
-                    <calc_fnc>2</calc_fnc>
-                    <type>0</type>
-                    <item>
-                        <host>Template App Apache</host>
-                        <key>apache.stat[workers_openslot]</key>
+                        <host>Template App Redis</host>
+                        <key>redis.stat[used_memory_rss]</key>
                     </item>
                 </graph_item>
             </graph_items>

@@ -1,4 +1,5 @@
 from ConfigParser import ConfigParser
+import json
 
 from check import Check, CheckFail, MetricType, Metric
 from lib.fcgiconnector import FcgiConnector
@@ -13,19 +14,19 @@ class PhpFpm(Check):
 
     def _init_metrics(self):
         self.metrics = {
-            "pool": Metric("pool", MetricType.String, 0, ":"),
-            "process_manager": Metric("process manager", MetricType.String, 1, ":"),
-            "start_since": Metric("start since", MetricType.Integer, 3, ":"),
-            "accepted_conn": Metric("accepted conn", MetricType.String, 4, ":"),
-            "listen_queue": Metric("listen queue", MetricType.Integer, 5, ":"),
-            "listen_queue_max": Metric("max listen queue", MetricType.Integer, 6, ":"),
-            "listen_queue_len": Metric("listen queue len", MetricType.Integer, 7, ":"),
-            "idle_processes": Metric("idle processes", MetricType.Integer, 8, ":"),
-            "active_processes": Metric("active processes", MetricType.Integer, 9, ":"),
-            "total_processes": Metric("total processes", MetricType.Integer, 10, ":"),
-            "active_processes_max": Metric("max active processes", MetricType.Integer, 11, ":"),
-            "max_children_reached": Metric("max children reached", MetricType.Integer, 12, ":"),
-            "slow_requests": Metric("slow requests", MetricType.Integer, 13, ":"),
+            "pool": Metric(MetricType.String, regex="pool:\s*(.+)"),
+            "process_manager": Metric(MetricType.String, regex="process manager:\s*(.+)"),
+            "start_since": Metric(MetricType.Integer, regex="start since:\s*([0-9]+)"),
+            "accepted_conn": Metric(MetricType.String, regex="accepted conn:\s*([0-9]+)"),
+            "listen_queue": Metric(MetricType.Integer, regex="listen queue:\s*([0-9]+)"),
+            "listen_queue_max": Metric(MetricType.Integer, regex="max listen queue:\s*([0-9]+)"),
+            "listen_queue_len": Metric(MetricType.Integer, regex="listen queue len:\s*([0-9]+)"),
+            "idle_processes": Metric(MetricType.Integer, regex="idle processes:\s*([0-9]+)"),
+            "active_processes": Metric(MetricType.Integer, regex="active processes:\s*([0-9]+)"),
+            "total_processes": Metric(MetricType.Integer, regex="total processes:\s*([0-9]+)"),
+            "active_processes_max": Metric(MetricType.Integer, regex="max active processes:\s*([0-9]+)"),
+            "max_children_reached": Metric(MetricType.Integer, regex="max children reached:\s*([0-9]+)"),
+            "slow_requests": Metric(MetricType.Integer, regex="slow requests:\s*([0-9]+)"),
         }
 
     def _get(self, metric=None, *args, **kwargs):
@@ -33,39 +34,26 @@ class PhpFpm(Check):
         if self.pool is None:
             raise CheckFail("Required parameters not set (pool)")
 
-        self.test_data = self._load_data()
+        self._load_data()
         return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
-        return self._correct_type(metric.type, self.test_data[metric.position].split(metric.separator)[1])
+        return self._correct_type(metric.type, metric.parser.get_value(self.test_data))
 
     def _load_data(self):
         self.test_data = Cache.read(self.name)
         if self.test_data is not None:
-            return self.test_data
+            return
 
         self._read_fpm_config()
+        connector = self._get_connector()
 
-        listen = self.fpm_config.get(self.pool, "listen")
-        status_path = self.fpm_config.get(self.pool, "pm.status_path")
-        if listen.startswith("/"):
-            connector = FcgiConnector(socket_file=listen, uri=status_path)
-        else:
-            if ":" in listen:
-                host, port = listen.split(":")
-                connector = FcgiConnector(host=host, port=port, uri=status_path)
-            else:
-                connector = FcgiConnector(port=listen, host="127.0.0.1", uri=status_path)
-
-        code, headers, data, error = connector.get()
+        code, headers, self.test_data, error = connector.get()
 
         if not code.startswith("200"):
-            self.logger.error("status: got response, but not correct")
-            return None
+            raise CheckFail("Unable to get response: %s (code: %s)" % (error, code))
 
-        Cache.write(self.name, data)
-
-        return data.split("\n")
+        Cache.write(self.name, self.test_data)
 
     def _read_fpm_config(self):
         if self.fpm_config is not None:
@@ -84,3 +72,18 @@ class PhpFpm(Check):
 
         if not self.fpm_config.has_option(self.pool, "pm.status_path"):
             raise CheckFail("Status path is not configured for pool %s" % self.pool)
+
+    def _get_connector(self):
+        listen = self.fpm_config.get(self.pool, "listen")
+        status_path = self.fpm_config.get(self.pool, "pm.status_path")
+
+        if listen.startswith("/"):
+            connector = FcgiConnector(socket_file=listen, uri=status_path)
+        else:
+            if ":" in listen:
+                host, port = listen.split(":")
+                connector = FcgiConnector(host=host, port=port, uri=status_path)
+            else:
+                connector = FcgiConnector(port=listen, host="127.0.0.1", uri=status_path)
+
+        return connector
