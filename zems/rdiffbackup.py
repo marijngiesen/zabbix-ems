@@ -47,8 +47,6 @@ class RdiffBackup(Check):
 
         Cache.write(self.name, self.test_data)
 
-        return self.test_data
-
     def _get_statistics_file(self):
         files = utils.find_files(
             os.path.join(self.config.get("rdiff_backup_path", "/mnt/backup/system"), "rdiff-backup-data"),

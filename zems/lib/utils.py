@@ -1,4 +1,5 @@
 import os
+from subprocess import Popen, STDOUT, PIPE
 
 
 def find_files_by_extension(path, extension):
@@ -41,3 +42,28 @@ def determine_newest_file(files):
             newest_file = filename
 
     return newest_file
+
+
+def run_command(command):
+    process = Popen(command, shell=True, stdout=PIPE, stderr=STDOUT)
+    output, error = process.communicate()
+    returncode = process.poll()
+
+    if returncode != 0:
+        raise RuntimeError("Error running command '%s': %s (%s)" % (command, error, returncode))
+
+    return output
+
+
+def transpose_dict(data, key):
+    if type(data) is not list:
+        return None
+
+    tmp = {}
+    for row in data:
+        if key not in row:
+            return None
+
+        tmp[row[key]] = row
+
+    return tmp

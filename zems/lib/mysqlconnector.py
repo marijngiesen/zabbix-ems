@@ -18,8 +18,9 @@ class MySQLConnector:
 
     def __init__(self, socket_file=None, host=None, port=None, user="", passwd="", db=""):
         self.socket_file = socket_file
-        self.host = host
-        self.port = int(port)
+        if socket_file is None:
+            self.host = host
+            self.port = int(port)
         self.user = user
         self.passwd = passwd
         self.db = db
@@ -31,21 +32,32 @@ class MySQLConnector:
         if self.connection is not None:
             return
 
-        if self.socket_file is not None:
-            self.connection = MySQLdb.connect(unix_socket=self.socket_file, user=self.user, passwd=self.passwd,
-                                              db=self.db)
-        else:
-            self.connection = MySQLdb.connect(host=self.host, port=self.port, user=self.user, passwd=self.passwd,
-                                              db=self.db)
+        try:
+            if self.socket_file is not None:
+                self.connection = MySQLdb.connect(unix_socket=self.socket_file, user=self.user, passwd=self.passwd,
+                                                  db=self.db)
+            else:
+                self.connection = MySQLdb.connect(host=self.host, port=self.port, user=self.user, passwd=self.passwd,
+                                                  db=self.db)
 
-        self.connection.autocommit(True)
+            self.connection.autocommit(True)
+        except MySQLdb.Error, e:
+            raise MySQLConnectorException(e)
 
     def _read(self, query):
         self._connect()
-        cursor = self.connection.cursor(MySQLdb.cursors.DictCursor)
 
-        cursor.execute(query)
-        items = cursor.fetchall()
-        cursor.close()
+        try:
+            cursor = self.connection.cursor(MySQLdb.cursors.DictCursor)
 
-        return items
+            cursor.execute(query)
+            items = cursor.fetchall()
+            cursor.close()
+
+            return items
+        except MySQLdb.Error, e:
+            raise MySQLConnectorException(e)
+
+
+class MySQLConnectorException(Exception):
+    pass

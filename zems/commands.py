@@ -8,12 +8,25 @@ def apache(metric=None):
     run_test(Apache(), metric)
 
 
+@command("dhcpd")
+def haproxy(metric=None, firstip=None):
+    from zems.dhcpd import Dhcpd
+
+    run_test(Dhcpd(), metric, firstip=firstip)
+
+
 @command("haproxy")
 def haproxy(metric=None, pxname=None, svname=None):
     from zems.haproxy import HAProxy
 
     run_test(HAProxy(), metric, need_root=True, pxname=pxname, svname=svname)
 
+
+@command("mysql")
+def sphinx(metric=None):
+    from zems.mysql import MySQL
+
+    run_test(MySQL(), metric)
 
 @command("nginx")
 def nginx(metric=None):
