@@ -67,3 +67,23 @@ def transpose_dict(data, key):
         tmp[row[key]] = row
 
     return tmp
+
+
+def dict_has_item(data, key, value):
+    if type(data) is not dict:
+        return False
+
+    if key not in data:
+        return False
+
+    if data[key] is not value:
+        return False
+
+    return True
+
+
+def dict_keys_to_lower(data):
+    if type(data) is not dict:
+        return None
+
+    return dict((k.lower(), v) for k, v in data.iteritems())

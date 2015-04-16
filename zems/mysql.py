@@ -1,7 +1,7 @@
 from check import Check, MetricType, Metric
 from lib.mysqlconnector import MySQLConnector, MySQLConnectorException
 from lib.cache import Cache
-
+from lib.utils import dict_has_item, dict_keys_to_lower
 
 class MySQL(Check):
     name = "mysql"
@@ -36,7 +36,7 @@ class MySQL(Check):
         if self.config.get("check_slave", True):
             self._get_slave_status()
 
-        if self.config.get("check_master", True) and self._dict_has_item(self.test_data, "log_bin", "ON"):
+        if self.config.get("check_master", True) and dict_has_item(self.test_data, "log_bin", "ON"):
             self._get_master_status()
 
         # if self.config.get("check_procs", True):
@@ -74,7 +74,7 @@ class MySQL(Check):
         if len(slave_status) < 1:
             return
 
-        slave_status = self._dict_keys_to_lower(slave_status)
+        slave_status = dict_keys_to_lower(slave_status)
         self.test_data["relay_log_space"] = slave_status["relay_log_space"]
         self.test_data["slave_lag"] = slave_status["seconds_behind_master"]
         self.test_data["slave_running"] = int(slave_status["slave_sql_running"] == "Yes")
@@ -97,7 +97,7 @@ class MySQL(Check):
             return
 
         for log in master_logs:
-            log = self._dict_keys_to_lower(log)
+            log = dict_keys_to_lower(log)
 
 
     def _get_processlist(self):
@@ -117,20 +117,3 @@ class MySQL(Check):
 
         return tmp
 
-    def _dict_has_item(self, data, key, value):
-        if type(data) is not dict:
-            return False
-
-        if key not in data:
-            return False
-
-        if data[key] is not value:
-            return False
-
-        return True
-
-    def _dict_keys_to_lower(self, data):
-        if type(data) is not dict:
-            return None
-
-        return dict((k.lower(), v) for k, v in data.iteritems())
