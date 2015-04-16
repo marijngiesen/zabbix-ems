@@ -27,6 +27,7 @@ class Apache(Check):
             "workers_reading": Metric(MetricType.Integer, self._parse_scoreboard, key="R"),
             "workers_starting": Metric(MetricType.Integer, self._parse_scoreboard, key="S"),
             "workers_writing": Metric(MetricType.Integer, self._parse_scoreboard, key="W"),
+            "ping": Metric(MetricType.Float, regex="Load_time: ([0-9\.]+)"),
         }
 
     def _get(self, metric=None, *args, **kwargs):
@@ -55,6 +56,8 @@ class Apache(Check):
             raise CheckFail("Unable to retrieve data (error code: %s)" % data.status_code)
 
         self.test_data = data.text.strip()
+        self.test_data += connector.get_load_time()
+
         Cache.write(self.name, self.test_data)
 
     def _parse_scoreboard(self, key):

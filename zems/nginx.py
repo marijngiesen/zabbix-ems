@@ -1,3 +1,4 @@
+from time import time
 from check import Check, CheckFail, MetricType, Metric
 from lib.urlconnector import UrlConnector
 from lib.cache import Cache
@@ -15,6 +16,7 @@ class Nginx(Check):
             "accepts": Metric(MetricType.Integer, linenumber=2, position=0, separator=" "),
             "handled": Metric(MetricType.Integer, linenumber=2, position=1, separator=" "),
             "requests": Metric(MetricType.Integer, linenumber=2, position=2, separator=" "),
+            "ping": Metric(MetricType.Float, regex="Load_time: ([0-9\.]+)"),
         }
 
     def _get(self, metric=None, *args, **kwargs):
@@ -22,6 +24,9 @@ class Nginx(Check):
         return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
+        if metric.callback is not None:
+            metric.callback()
+
         return self._correct_type(metric.type, metric.parser.get_value(self.test_data))
 
     def _load_data(self):
@@ -40,4 +45,6 @@ class Nginx(Check):
             raise CheckFail("Unable to retrieve data (error code: %s)" % data.status_code)
 
         self.test_data = data.text.strip()
+        self.test_data += connector.get_load_time()
+
         Cache.write(self.name, self.test_data)
