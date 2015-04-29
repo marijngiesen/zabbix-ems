@@ -76,7 +76,7 @@ def dict_has_item(data, key, value):
     if key not in data:
         return False
 
-    if data[key] is not value:
+    if data[key] != value:
         return False
 
     return True

@@ -27,7 +27,7 @@ class Apache(Check):
             "workers_reading": Metric(MetricType.Integer, self._parse_scoreboard, key="R"),
             "workers_starting": Metric(MetricType.Integer, self._parse_scoreboard, key="S"),
             "workers_writing": Metric(MetricType.Integer, self._parse_scoreboard, key="W"),
-            "ping": Metric(MetricType.Float, regex="Load_time: ([0-9\.]+)"),
+            "ping": Metric(MetricType.Float, regex=UrlConnector.regex),
         }
 
     def _get(self, metric=None, *args, **kwargs):
