@@ -42,6 +42,13 @@ def phpfpm(metric=None, pool=None):
     run_test(PhpFpm(), metric, pool=pool)
 
 
+@command("radiator")
+def phpfpm(metric=None):
+    from zems.radiator import Radiator
+
+    run_test(Radiator(), metric)
+
+
 @command("rdiff-backup")
 def rdiffbackup(metric=None):
     from zems.rdiffbackup import RdiffBackup

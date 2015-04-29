@@ -39,9 +39,6 @@ class Radiator(Check):
         return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
-        if metric.type == MetricType.Discovery or metric.callback is not None:
-            metric.callback()
-
         return self._correct_type(metric.type, metric.parser.get_value(self.test_data))
 
     def _load_data(self):
