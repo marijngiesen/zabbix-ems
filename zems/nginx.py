@@ -16,7 +16,7 @@ class Nginx(Check):
             "accepts": Metric(MetricType.Integer, linenumber=2, position=0, separator=" "),
             "handled": Metric(MetricType.Integer, linenumber=2, position=1, separator=" "),
             "requests": Metric(MetricType.Integer, linenumber=2, position=2, separator=" "),
-            "ping": Metric(MetricType.Float, regex=UrlConnector.regex),
+            "ping": Metric(MetricType.Float, regex=UrlConnector.load_time_regex),
         }
 
     def _get(self, metric=None, *args, **kwargs):

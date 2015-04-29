@@ -10,7 +10,7 @@ except ImportError:
 class UrlConnector:
     url = None
     load_time = 0
-    regex = "Load_time: ([0-9\.]+)"
+    load_time_regex = "Load_time: ([0-9\.]+)"
 
     def __init__(self, url):
         self.url = url
