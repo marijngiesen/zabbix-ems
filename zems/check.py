@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """
     ZTCCheck class - wrapper for ztc checks
     provides logging, output formatting and error handling abilities
@@ -17,7 +16,13 @@ import json
 import traceback
 import ConfigParser
 
-from enum import Enum
+try:
+    from enum import Enum
+except ImportError:
+    Enum = None
+    print "Error: enum34 module cannot be loaded, please install using 'pip install enum34'"
+    sys.exit(1)
+
 from lib.parser import Parser
 from lib.logger import Logger
 

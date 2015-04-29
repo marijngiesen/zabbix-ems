@@ -1,19 +1,31 @@
 %define name zems
-%define version 0.0.9
+%define version 0.0.10
 %define release 1
+%if 0%{?el5}
+    define pythoncmd python26
+%else
+    define pythoncmd python
+%endif
 
 Summary: ZEMS (Zabbix Extended Monitoring Scripts) is a tool to retrieve all sorts of metrics from applications and deliver it to Zabbix in a generic way.
 Name: %{name}
 Version: %{version}
-Release: %{release}
+Release: %{release}%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPL
 Group: Development/Libraries
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Prefix: %{_prefix}
 BuildArch: noarch
+
+%if 0%{?el5}
+Requires: python26
+Requires: python26-setuptools
+%else
 Requires: python >= 2.6
 Requires: python-setuptools
+%endif
+
 Requires: zabbix
 Requires: zabbix-agent
 Requires: sudo

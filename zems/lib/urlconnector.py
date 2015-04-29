@@ -1,4 +1,10 @@
-import requests
+try:
+    import requests
+except ImportError:
+    import sys
+    requests = None
+    print "Error: requests module cannot be loaded, please install using 'pip install requests'"
+    sys.exit(1)
 
 
 class UrlConnector:

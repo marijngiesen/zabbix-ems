@@ -1,9 +1,8 @@
-import glob
 from setuptools import setup
 
 setup(
     name='zems',
-    version='0.0.9',
+    version='0.0.10',
     packages=['zems', 'zems.lib'],
     url='https://github.com/marijngiesen/zabbix-ems',
     license='GPL',
