@@ -1,4 +1,3 @@
-from time import time
 from check import Check, CheckFail, MetricType, Metric
 from lib.urlconnector import UrlConnector
 from lib.cache import Cache
