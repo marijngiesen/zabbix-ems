@@ -1,11 +1,11 @@
 %define name zems
 %define version 0.0.10
 %define release 1
-%if 0%{?el5}
-    define pythoncmd python26
-%else
-    define pythoncmd python
-%endif
+#%if 0%{?el5}
+#    define pythoncmd python26
+#%else
+#    define pythoncmd python
+#%endif
 
 Summary: ZEMS (Zabbix Extended Monitoring Scripts) is a tool to retrieve all sorts of metrics from applications and deliver it to Zabbix in a generic way.
 Name: %{name}
@@ -64,6 +64,11 @@ fi
 # We need to create the logfile, cause Zems will error out if not.
 touch /var/log/zems.log
 chmod 666 /var/log/zems.log
+
+# Make zems work on EL5
+if [ ! -z "`uname -r | grep el5`" ]; then
+    sed -i 's/#!.*$/#!\/usr\/bin\/python26/' /usr/bin/zems
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT

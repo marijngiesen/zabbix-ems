@@ -48,7 +48,7 @@ class Radiator(Check):
 
         connector = SocketConnector(host=self.config.get("host", "127.0.0.1"),
                                     port=self.config.get("port", 9002),
-                                    command="LOGIN %s %s\nSTATS .\n" % (
+                                    command="LOGIN %s %s\nSTATS .\nQUIT\n" % (
                                         self.config.get("user", ""), self.config.get("passwd", "")))
 
         self.test_data = connector.get()

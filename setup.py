@@ -14,6 +14,5 @@ setup(
         'console_scripts': [
             'zems = zems.main:main',
         ]
-    },
-    install_requires=['requests', 'enum34', 'commandr'],
+    }, requires=['commandr', 'enum34']
 )
