@@ -1,10 +1,8 @@
 from ConfigParser import ConfigParser
-import json
-
 from check import Check, CheckFail, MetricType, Metric
 from lib.fcgiconnector import FcgiConnector
-from lib import utils
-from zems.lib.cache import Cache
+from lib.utils import find_files_by_extension
+from lib.cache import Cache
 
 
 class PhpFpm(Check):
@@ -16,8 +14,8 @@ class PhpFpm(Check):
         self.metrics = {
             "pool": Metric(MetricType.String, regex="pool:\s*(.+)"),
             "process_manager": Metric(MetricType.String, regex="process manager:\s*(.+)"),
-            "start_since": Metric(MetricType.Integer, regex="start since:\s*([0-9]+)"),
-            "accepted_conn": Metric(MetricType.String, regex="accepted conn:\s*([0-9]+)"),
+            "uptime": Metric(MetricType.Integer, regex="start since:\s*([0-9]+)"),
+            "accepted_conn": Metric(MetricType.Integer, regex="accepted conn:\s*([0-9]+)"),
             "listen_queue": Metric(MetricType.Integer, regex="listen queue:\s*([0-9]+)"),
             "listen_queue_max": Metric(MetricType.Integer, regex="max listen queue:\s*([0-9]+)"),
             "listen_queue_len": Metric(MetricType.Integer, regex="listen queue len:\s*([0-9]+)"),
@@ -27,17 +25,30 @@ class PhpFpm(Check):
             "active_processes_max": Metric(MetricType.Integer, regex="max active processes:\s*([0-9]+)"),
             "max_children_reached": Metric(MetricType.Integer, regex="max children reached:\s*([0-9]+)"),
             "slow_requests": Metric(MetricType.Integer, regex="slow requests:\s*([0-9]+)"),
+            "discovery": Metric(MetricType.Discovery, self._discovery),
         }
 
     def _get(self, metric=None, *args, **kwargs):
         self.pool = kwargs.get("pool", None)
-        if self.pool is None:
-            raise CheckFail("Required parameters not set (pool)")
 
-        self._load_data()
         return self._get_value(self.metrics[metric])
 
     def _get_value(self, metric):
+        self._read_fpm_config()
+
+        if metric.type == MetricType.Discovery:
+            metric.callback()
+            return self._correct_type(metric.type, self.test_data)
+
+        self._load_data()
+
+        if self.pool is None:
+            raise CheckFail("Required parameters not set (pool)")
+        if self.pool not in self.fpm_config.sections():
+            raise CheckFail("Pool %s does not exist in config files" % self.pool)
+        if not self.fpm_config.has_option(self.pool, "pm.status_path"):
+            raise CheckFail("Status path is not configured for pool %s" % self.pool)
+
         return self._correct_type(metric.type, metric.parser.get_value(self.test_data))
 
     def _load_data(self):
@@ -45,7 +56,6 @@ class PhpFpm(Check):
         if self.test_data is not None:
             return
 
-        self._read_fpm_config()
         connector = self._get_connector()
 
         code, headers, self.test_data, error = connector.get()
@@ -62,16 +72,10 @@ class PhpFpm(Check):
         fpm_config_path = self.config.get("fpm_config_path", "/etc/php-fpm.d")
 
         self.fpm_config = ConfigParser()
-        self.fpm_config.read(utils.find_files_by_extension(fpm_config_path, "conf"))
+        self.fpm_config.read(find_files_by_extension(fpm_config_path, "conf"))
 
         if len(self.fpm_config.sections()) == 0:
             self.logger.error("Can't read from PHP-FPM config")
-
-        if self.pool not in self.fpm_config.sections():
-            raise CheckFail("Pool %s does not exist in config files" % self.pool)
-
-        if not self.fpm_config.has_option(self.pool, "pm.status_path"):
-            raise CheckFail("Status path is not configured for pool %s" % self.pool)
 
     def _get_connector(self):
         listen = self.fpm_config.get(self.pool, "listen")
@@ -87,3 +91,6 @@ class PhpFpm(Check):
                 connector = FcgiConnector(port=listen, host="127.0.0.1", uri=status_path)
 
         return connector
+
+    def _discovery(self):
+        self.test_data = [{"{#POOL}": item} for item in self.fpm_config.sections()]
