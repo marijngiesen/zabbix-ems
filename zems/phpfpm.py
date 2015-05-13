@@ -25,6 +25,7 @@ class PhpFpm(Check):
             "active_processes_max": Metric(MetricType.Integer, regex="max active processes:\s*([0-9]+)"),
             "max_children_reached": Metric(MetricType.Integer, regex="max children reached:\s*([0-9]+)"),
             "slow_requests": Metric(MetricType.Integer, regex="slow requests:\s*([0-9]+)"),
+            "ping": Metric(MetricType.Float, regex=FcgiConnector.load_time_regex),
             "discovery": Metric(MetricType.Discovery, self._discovery),
         }
 
@@ -41,6 +42,8 @@ class PhpFpm(Check):
             return self._correct_type(metric.type, self.test_data)
 
         self._load_data()
+
+        print self.test_data
 
         if self.pool is None:
             raise CheckFail("Required parameters not set (pool)")
@@ -59,6 +62,7 @@ class PhpFpm(Check):
         connector = self._get_connector()
 
         code, headers, self.test_data, error = connector.get()
+        self.test_data += connector.get_load_time()
 
         if not code.startswith("200"):
             raise CheckFail("Unable to get response: %s (code: %s)" % (error, code))

@@ -1,5 +1,5 @@
 %define name zems
-%define version 0.0.11
+%define version 0.0.12
 %define release 1
 #%if 0%{?el5}
 #    define pythoncmd python26

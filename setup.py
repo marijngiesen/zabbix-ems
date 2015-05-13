@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='zems',
-    version='0.0.11',
+    version='0.0.12',
     packages=['zems', 'zems.lib'],
     url='https://github.com/marijngiesen/zabbix-ems',
     license='GPL',
@@ -14,5 +14,6 @@ setup(
         'console_scripts': [
             'zems = zems.main:main',
         ]
-    }, requires=['commandr', 'enum34']
+    },
+    requires=['commandr', 'enum34']
 )

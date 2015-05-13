@@ -17,7 +17,7 @@ def apache(metric=None):
 def haproxy(metric=None, firstip=None):
     from zems.dhcpd import Dhcpd
 
-    run_test(Dhcpd(), metric, firstip=firstip)
+    run_test(Dhcpd(), metric, need_root=True, firstip=firstip)
 
 
 @command("haproxy")

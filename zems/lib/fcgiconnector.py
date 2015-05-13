@@ -1,3 +1,4 @@
+from time import time
 import flup_fcgi_client as fcgi_client
 
 
@@ -6,6 +7,8 @@ class FcgiConnector:
     host = None
     port = None
     uri = None
+    load_time = 0
+    load_time_regex = "Load_time: ([0-9\.]+)"
 
     def __init__(self, socket_file=None, host=None, port=None,
                  uri=None):
@@ -18,6 +21,7 @@ class FcgiConnector:
         return self._read()
 
     def _read(self):
+        start_time = time()
         if self.socket_file is not None:
             fcgi = fcgi_client.FCGIApp(connect=self.socket_file)
         elif self.host is not None and self.port is not None:
@@ -43,4 +47,10 @@ class FcgiConnector:
             'DOCUMENT_ROOT': '/var/www/'
         }
 
-        return fcgi(env)
+        result = fcgi(env)
+        self.load_time = time() - start_time
+
+        return result
+
+    def get_load_time(self):
+        return "Load_time: %s" % str(self.load_time)

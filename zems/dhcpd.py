@@ -32,7 +32,7 @@ class Dhcpd(Check):
     def _get_value(self, metric):
         if metric.type == MetricType.Discovery:
             metric.callback()
-            return self.test_data
+            return self._correct_type(metric.type, self.test_data)
 
         key = metric.kwargs.get("key")
         if self.first_ip is None:
