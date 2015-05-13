@@ -7,6 +7,8 @@ Check our Trello board for development progress: https://trello.com/b/uCcdHHwj/z
 
 Install on EL5
 --------------
+* Install Python 2.6
+
 * Install setuptools
 	
 	`ftp://ftp.pbone.net/mirror/ftp.pramberger.at/systems/linux/contrib/rhel5/i386/python26-setuptools-0.7.4-1.el5.pp.noarch.rpm`
