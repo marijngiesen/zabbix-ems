@@ -7,6 +7,8 @@ Check our Trello board for development progress: https://trello.com/b/uCcdHHwj/z
 
 Install on EL5
 --------------
+* Install epel repository
+
 * Install Python 2.6
 
 * Install setuptools
