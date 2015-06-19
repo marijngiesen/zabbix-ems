@@ -52,10 +52,13 @@ install -m 0644 -p templates/*.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/templates
 
 %post
 # Make sure Zabbix can execute zems as root
-if [ -z "`cat /etc/sudoers | grep 'zabbix ALL=NOPASSWD: /usr/bin/zems'`" ]; then
-    echo 'zabbix ALL=NOPASSWD: /usr/bin/zems' >> /etc/sudoers
+if [ -z "`cat /etc/sudoers | grep 'zabbix ALL=NOPASSWD'`" ]; then
+    cat <<HERE >> /etc/sudoers
+Cmnd_Alias ZABBIX_CMNDS = /usr/bin/zems
+zabbix ALL=NOPASSWD: ZABBIX_CMNDS
+HERE
 fi
-
+    
 # Do not require a TTY for the Zabbix user
 if [ -z "`cat /etc/sudoers | grep 'Defaults:zabbix !requiretty'`" ]; then
     echo 'Defaults:zabbix !requiretty' >> /etc/sudoers
