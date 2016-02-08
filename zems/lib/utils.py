@@ -1,5 +1,8 @@
 import os
+from datetime import datetime
 from subprocess import Popen, STDOUT, PIPE
+
+from logger import Logger
 
 
 def find_files_by_extension(path, extension):
@@ -10,7 +13,7 @@ def find_files_by_extension(path, extension):
         os.path.join(root, filename)
         for root, dirs, files in os.walk(path)
         for filename in files if filename.endswith(extension)
-    ]
+        ]
 
     if len(files) < 1:
         raise IOError("No files found with extension %s" % extension)
@@ -23,7 +26,7 @@ def find_files(path, name):
         os.path.join(root, filename)
         for root, dirs, files in os.walk(path)
         for filename in files if name in filename
-    ]
+        ]
 
     if len(files) < 1:
         raise IOError("No files found with name %s" % name)
@@ -87,3 +90,24 @@ def dict_keys_to_lower(data):
         return None
 
     return dict((k.lower(), v) for k, v in data.iteritems())
+
+
+def log_performance(func):
+    def wrapper(*args, **kwargs):
+        if not Logger.debug:
+            return func(*args, **kwargs)
+
+        t1 = datetime.now()
+        res = func(*args, **kwargs)
+        t2 = datetime.now() - t1
+
+        if args[0].logger is not None:
+            args[0].logger.debug(
+                "Performance: Executed method %s in %d.%06ds" % (func.__name__, t2.seconds, t2.microseconds))
+        else:
+            logger = Logger.get("Performance")
+            logger.debug("Executed method %s in %ss" % (func.__name__, str(t2)))
+
+        return res
+
+    return wrapper

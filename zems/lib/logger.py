@@ -45,4 +45,3 @@ class Logger(object):
         logger.debug("Loghandler created")
 
         return logger
-

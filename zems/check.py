@@ -12,8 +12,6 @@
 """
 import os
 import sys
-import json
-import traceback
 import ConfigParser
 
 try:
@@ -25,6 +23,7 @@ except ImportError:
 
 from lib.parser import Parser
 from lib.logger import Logger
+from lib.utils import log_performance
 
 
 class Check(object):
@@ -42,7 +41,7 @@ class Check(object):
         if name is not None:
             self.name = name
         if self.name == 'zems':
-            raise NotImplementedError("Class %s must redefine its name" % (self.__class__.__name__, ))
+            raise NotImplementedError("Class %s must redefine its name" % (self.__class__.__name__,))
 
         self.config = self._get_config()
 
@@ -59,16 +58,21 @@ class Check(object):
             MetricType.Discovery: []
         }
 
+        self._init_metrics_wrapper()
+
+    @log_performance
+    def _init_metrics_wrapper(self):
         self._init_metrics()
 
     def _init_metrics(self):
         raise NotImplementedError("Class %s must reimplement _init_metrics method"
-                                  % (self.__class__.__name__, ))
+                                  % (self.__class__.__name__,))
 
     def _get(self, *args, **kwargs):
         raise NotImplementedError("Class %s must reimplement _get method"
-                                  % (self.__class__.__name__, ))
+                                  % (self.__class__.__name__,))
 
+    @log_performance
     def get(self, metric=None, *args, **kwargs):
         self.logger.debug("executed get metric '%s', args '%s', kwargs '%s'" %
                           (str(metric), str(args), str(kwargs)))
@@ -79,33 +83,40 @@ class Check(object):
 
             print self._get(metric, *args, **kwargs)
         except CheckFail, e:
-            self.logger.exception('Check fail, getting %s' % (metric, ))
+            self.logger.exception('Check fail, getting %s' % (metric,))
             if self.debug:
+                import traceback
+
                 traceback.print_stack()
             for arg in e.args:
                 print(arg)
             sys.exit(1)
         except CheckTimeout, e:
-            self.logger.exception('Check timeout, getting %s' % (metric, ))
+            self.logger.exception('Check timeout, getting %s' % (metric,))
             if self.debug:
+                import traceback
+
                 traceback.print_stack()
             for arg in e.args:
                 print(arg)
             sys.exit(2)
         except Exception, e:
-            self.logger.exception('Check unexpected error, getting %s' % (metric, ))
+            self.logger.exception('Check unexpected error, getting %s' % (metric,))
             sys.exit(1)
 
+    @log_performance
     def print_metrics(self):
         print "Available metrics:"
         for metric in sorted(self.metrics.keys()):
             print "  %s" % metric
 
+    @log_performance
     def need_root(self):
         if os.getuid() != 0:
             self.logger.exception("Need root privileges to perform this check")
             sys.exit(1)
 
+    @log_performance
     def _correct_type(self, metric_type, value):
         try:
             if metric_type == MetricType.String:
@@ -123,12 +134,16 @@ class Check(object):
         except ValueError:
             return self.default_value[metric_type]
 
+    @log_performance
     def _get_config(self):
         config = MyConfigParser()
         config.read(os.path.join(self.confdir, self.name + ".conf"))
         return config
 
+    @log_performance
     def _to_discovery_output(self, data):
+        import json
+
         return json.dumps({"data": data})
 
 
