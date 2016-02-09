@@ -248,7 +248,7 @@ class MySQL(Check):
         if self.config.get("check_procs", True):
             self._get_processlist()
 
-        if self.config.get("check_innodb", True) and dict_has_item(self.test_data, "have_innodb", "YES"):
+        if self.config.get("check_innodb", True) and "innodb_version" in self.test_data:
             self._get_innodb_status()
 
         # Not yet implemented
@@ -271,17 +271,30 @@ class MySQL(Check):
                                             user=self.config.get("user", "root"), passwd=self.config.get("passwd", ""))
 
     def _get_global_status(self):
-        self.test_data.update(self._format_data(self.connector.get("SHOW /*!50002 GLOBAL */ STATUS")))
+        try:
+            self.test_data.update(self._format_data(self.connector.get("SHOW /*!50002 GLOBAL */ STATUS")))
+        except Exception, e:
+            self.logger.exception("Unable to get global status. Error: %s" % e)
+            return
 
     def _get_variables(self):
-        self.test_data.update(self._format_data(self.connector.get("SHOW VARIABLES")))
+        try:
+            self.test_data.update(self._format_data(self.connector.get("SHOW VARIABLES")))
+        except Exception, e:
+            self.logger.exception("Unable to get variables. Error: %s" % e)
+            return
 
     def _get_slave_status(self):
-        slave_status = self.connector.get("SHOW SLAVE STATUS")
+        try:
+            slave_status = self.connector.get("SHOW SLAVE STATUS")[0]
+        except Exception, e:
+            self.logger.exception("Unable to get slave status. Error: %s" % e)
+            return
+
         if len(slave_status) < 1:
             return
 
-        slave_status = dict_keys_to_lower(slave_status[0])
+        slave_status = dict_keys_to_lower(slave_status)
         self.test_data["relay_log_space"] = slave_status["relay_log_space"]
         self.test_data["slave_lag"] = slave_status["seconds_behind_master"]
         self.test_data["slave_io_running"] = int(slave_status["slave_io_running"] == "Yes")
@@ -300,7 +313,12 @@ class MySQL(Check):
                 self.logger.exception("Unable to get data from heartbeat table '%s'. Error: %s" % (heartbeat_table, e))
 
     def _get_master_status(self):
-        master_logs = self.connector.get("SHOW MASTER LOGS")
+        try:
+            master_logs = self.connector.get("SHOW MASTER LOGS")
+        except Exception, e:
+            self.logger.exception("Unable to get master logs. Error: %s" % e)
+            return
+
         if len(master_logs) < 1:
             return
 
@@ -332,7 +350,12 @@ class MySQL(Check):
             "state_other": 0,
         }
 
-        processlist = self.connector.get("SHOW PROCESSLIST")
+        try:
+            processlist = self.connector.get("SHOW PROCESSLIST")
+        except Exception, e:
+            self.logger.exception("Unable to get processlist. Error: %s" % e)
+            return
+
         for process in processlist:
             state = str(process["State"])
 
@@ -369,7 +392,12 @@ class MySQL(Check):
             "last_checkpoint": 0,
         }
 
-        innodb_status = self.connector.get("SHOW /*!50000 ENGINE*/ INNODB STATUS")[0]["Status"].split("\n")
+        try:
+            innodb_status = self.connector.get("SHOW /*!50000 ENGINE*/ INNODB STATUS")[0]["Status"].split("\n")
+        except Exception, e:
+            self.logger.exception("Unable to get InnoDB status. Error: %s" % e)
+            return
+
         for row in innodb_status:
             column = filter(bool, row.translate(None, ",.:;").split(" "))
 
@@ -481,8 +509,12 @@ class MySQL(Check):
         self.test_data.update(status)
 
     def _get_percona_qrt(self):
-        percona_qrt = self.connector.get("SELECT `count`, total * 1000000 AS total "
-                                         "FROM INFORMATION_SCHEMA.QUERY_RESPONSE_TIME WHERE `time` <> 'TOO LONG'")
+        try:
+            percona_qrt = self.connector.get("SELECT `count`, total * 1000000 AS total "
+                                             "FROM INFORMATION_SCHEMA.QUERY_RESPONSE_TIME WHERE `time` <> 'TOO LONG'")
+        except Exception, e:
+            self.logger.exception("Unable to get Percona query response times. Error: %s" % e)
+            return
 
     def _format_data(self, data, key_column="Variable_name", value_column="Value"):
         tmp = {}
