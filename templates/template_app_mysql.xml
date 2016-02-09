@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2016-02-09T10:58:08Z</date>
+    <date>2016-02-09T15:01:11Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -7083,8 +7083,8 @@
             </dependencies>
         </trigger>
         <trigger>
-            <expression>{Template App MySQL:mysql.stat[slave_sql_running].last(0)}=1</expression>
-            <name>Slave is stopped on {HOST.NAME}</name>
+            <expression>{Template App MySQL:mysql.stat[slave_sql_running].last(0)}=0 or {Template App MySQL:mysql.stat[slave_io_running].last()}=0</expression>
+            <name>Slave is not running on {HOST.NAME}</name>
             <url/>
             <status>0</status>
             <priority>4</priority>
