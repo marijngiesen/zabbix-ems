@@ -277,11 +277,11 @@ class MySQL(Check):
         self.test_data.update(self._format_data(self.connector.get("SHOW VARIABLES")))
 
     def _get_slave_status(self):
-        slave_status = self.connector.get("SHOW SLAVE STATUS")[0]
+        slave_status = self.connector.get("SHOW SLAVE STATUS")
         if len(slave_status) < 1:
             return
 
-        slave_status = dict_keys_to_lower(slave_status)
+        slave_status = dict_keys_to_lower(slave_status[0])
         self.test_data["relay_log_space"] = slave_status["relay_log_space"]
         self.test_data["slave_lag"] = slave_status["seconds_behind_master"]
         self.test_data["slave_io_running"] = int(slave_status["slave_io_running"] == "Yes")
