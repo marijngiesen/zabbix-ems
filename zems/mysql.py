@@ -70,7 +70,8 @@ class MySQL(Check):
             "max_connections": Metric(MetricType.Integer, key="max_connections"),
             "thread_cache_size": Metric(MetricType.Integer, key="thread_cache_size"),
             "connections": Metric(MetricType.Integer, key="connections"),
-            "slave_running": Metric(MetricType.Integer, key="slave_running"),
+            "slave_io_running": Metric(MetricType.Integer, key="slave_io_running"),
+            "slave_sql_running": Metric(MetricType.Integer, key="slave_sql_running"),
             "slave_retried_transactions": Metric(MetricType.Integer, key="slave_retried_transactions"),
             "slave_lag": Metric(MetricType.Integer, key="slave_lag"),
             "slave_open_temp_tables": Metric(MetricType.Integer, key="slave_open_temp_tables"),
@@ -213,6 +214,7 @@ class MySQL(Check):
             "wsrep_flow_control_recv": Metric(MetricType.Integer, key="wsrep_flow_control_recv"),
             "pool_reads": Metric(MetricType.Integer, key="pool_reads"),
             "pool_read_requests": Metric(MetricType.Integer, key="pool_read_requests"),
+            "version": Metric(MetricType.String, key="version"),
         }
 
     def _get(self, metric=None, *args, **kwargs):
@@ -282,7 +284,8 @@ class MySQL(Check):
         slave_status = dict_keys_to_lower(slave_status)
         self.test_data["relay_log_space"] = slave_status["relay_log_space"]
         self.test_data["slave_lag"] = slave_status["seconds_behind_master"]
-        self.test_data["slave_running"] = int(slave_status["slave_sql_running"] == "Yes")
+        self.test_data["slave_io_running"] = int(slave_status["slave_io_running"] == "Yes")
+        self.test_data["slave_sql_running"] = int(slave_status["slave_sql_running"] == "Yes")
 
         heartbeat_table = self.config.get("heartbeat", "")
         if len(heartbeat_table) > 0:

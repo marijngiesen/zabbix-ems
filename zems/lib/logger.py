@@ -29,13 +29,8 @@ class Logger(object):
         h = logging.StreamHandler(open(logfile, "a"))
 
         if debug:
-            # setting stream handler
-            sh = logging.StreamHandler()
-            sh.setLevel(logging.DEBUG)
             logger.setLevel(logging.DEBUG)
-            sh.setFormatter(formatter)
             h.setLevel(logging.DEBUG)
-            logger.addHandler(sh)
         else:
             logger.setLevel(logging.WARN)
             h.setLevel(logging.WARN)

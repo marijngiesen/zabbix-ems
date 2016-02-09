@@ -49,7 +49,7 @@ class Check(object):
             self.debug = True
 
         self.logger = Logger.get(self.__class__.__name__, self.config.get("logfile", Logger.logfile), self.debug)
-        self.logger.debug("config file: %s" % os.path.join(self.confdir, self.name + ".conf"))
+        self.logger.debug("Config file: %s" % os.path.join(self.confdir, self.name + ".conf"))
 
         self.default_value = {
             MetricType.Integer: 0,
@@ -74,7 +74,7 @@ class Check(object):
 
     @log_performance
     def get(self, metric=None, *args, **kwargs):
-        self.logger.debug("executed get metric '%s', args '%s', kwargs '%s'" %
+        self.logger.debug("Executed get metric '%s', args '%s', kwargs '%s'" %
                           (str(metric), str(args), str(kwargs)))
         try:
             metric = metric.lower()
@@ -134,7 +134,6 @@ class Check(object):
         except ValueError:
             return self.default_value[metric_type]
 
-    @log_performance
     def _get_config(self):
         config = MyConfigParser()
         config.read(os.path.join(self.confdir, self.name + ".conf"))

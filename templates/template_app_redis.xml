@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>2.0</version>
-    <date>2015-04-29T14:34:40Z</date>
+    <date>2016-02-08T22:10:05Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -24,7 +24,7 @@
             </applications>
             <items>
                 <item>
-                    <name>Redis: Blocked Clients</name>
+                    <name>Redis: Blocked clients</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -67,12 +67,12 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Changes Since Last Save</name>
+                    <name>Redis: Changes since last save</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>redis.stat[changes_since_last_save]</key>
+                    <key>redis.stat[rdb_changes_since_last_save]</key>
                     <delay>60</delay>
                     <history>30</history>
                     <trends>365</trends>
@@ -110,7 +110,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Client Biggest Input Buffer</name>
+                    <name>Redis: Client biggest input buffer</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -153,7 +153,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Client Longest Output List</name>
+                    <name>Redis: Client longest output list</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -239,7 +239,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Connected Clients</name>
+                    <name>Redis: Connected clients</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -282,7 +282,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Connected Slaves</name>
+                    <name>Redis: Connected slaves</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -368,7 +368,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Evicted Keys</name>
+                    <name>Redis: Evicted keys</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -411,7 +411,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Expired Keys</name>
+                    <name>Redis: Expired keys</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -454,7 +454,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Keyspace Hits</name>
+                    <name>Redis: Keyspace hits</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -497,7 +497,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Keyspace Misses</name>
+                    <name>Redis: Keyspace misses</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -540,7 +540,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Memory Fragmentation Ratio</name>
+                    <name>Redis: Memory fragmentation ratio</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -550,7 +550,7 @@
                     <history>30</history>
                     <trends>365</trends>
                     <status>0</status>
-                    <value_type>3</value_type>
+                    <value_type>0</value_type>
                     <allowed_hosts/>
                     <units/>
                     <delta>0</delta>
@@ -583,7 +583,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Total Allocated memory</name>
+                    <name>Redis: Total allocated memory</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -626,7 +626,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Used CPU Sys</name>
+                    <name>Redis: Used CPU system</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -669,12 +669,12 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Used CPU Sys Childrens</name>
+                    <name>Redis: Used CPU system children</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>redis.stat[used_cpu_sys_childrens]</key>
+                    <key>redis.stat[used_cpu_sys_children]</key>
                     <delay>60</delay>
                     <history>30</history>
                     <trends>365</trends>
@@ -712,7 +712,7 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Used CPU User</name>
+                    <name>Redis: Used CPU user</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
@@ -755,12 +755,12 @@
                     <logtimefmt/>
                 </item>
                 <item>
-                    <name>Redis: Used CPU User Childrens</name>
+                    <name>Redis: Used CPU user children</name>
                     <type>0</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
-                    <key>redis.stat[used_cpu_user_childrens]</key>
+                    <key>redis.stat[used_cpu_user_children]</key>
                     <delay>60</delay>
                     <history>30</history>
                     <trends>365</trends>
