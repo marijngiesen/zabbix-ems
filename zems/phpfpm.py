@@ -43,8 +43,6 @@ class PhpFpm(Check):
 
         self._load_data()
 
-        print self.test_data
-
         if self.pool is None:
             raise CheckFail("Required parameters not set (pool)")
         if self.pool not in self.fpm_config.sections():
@@ -76,7 +74,9 @@ class PhpFpm(Check):
         fpm_config_path = self.config.get("fpm_config_path", "/etc/php-fpm.d")
 
         self.fpm_config = ConfigParser()
-        self.fpm_config.read(find_files_by_extension(fpm_config_path, "conf"))
+        configs = find_files_by_extension(fpm_config_path, "conf")
+        self.fpm_config.read(configs)
+        self.logger.debug("Found PHP-FPM configs: %s" % str(configs))
 
         if len(self.fpm_config.sections()) == 0:
             self.logger.error("Can't read from PHP-FPM config")
