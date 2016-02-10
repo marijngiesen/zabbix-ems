@@ -434,6 +434,8 @@ class MySQL(Check):
                 if row.startswith("LOCK WAIT"):
                     status["innodb_lock_structs"] += int(column[2])
                     status["locked_transactions"] += 1
+                elif row.startswith("ROLLING"):
+                    status["innodb_lock_structs"] += int(column[2])
                 else:
                     status["innodb_lock_structs"] += int(column[0])
             elif " OS file reads, " in row:
