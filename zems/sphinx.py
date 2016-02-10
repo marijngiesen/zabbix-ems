@@ -64,7 +64,12 @@ class Sphinx(Check):
     def _format_data(self, data):
         tmp = {}
         for value in data:
-            tmp[value["Counter"]] = value["Value"]
+            if "Counter" in value:
+                key = "Counter"
+            else:
+                key = "Variable_name"
+
+            tmp[value[key]] = value["Value"]
 
         return tmp
 
